@@ -1,0 +1,53 @@
+Create your own store! Your store should sell one type of things, like clothing or bikes, whatever you want your store to specialize in. 
+You should have a table for all the items in your store, and at least 5 columns for the kind of data you think you'd need to store. 
+You should sell at least 15 items, and use select statements to order your items by price and show at least one statistic about the items.
+
+CREATE TABLE Rubys_Store (id INTEGER PRIMARY KEY, clothing TEXT, color TEXT, price INTEGER, quantity INTEGER, sold INTEGER);
+
+INSERT INTO Rubys_Store 
+  VALUES (1, "shirt", "blue", 10.99, 3, 7);
+INSERT INTO Rubys_Store 
+  VALUES (2, "shirt", "green", 10.99, 1, 14);
+INSERT INTO Rubys_Store 
+  VALUES (3, "hat", "gray", 14.99, 2, 1);
+INSERT INTO Rubys_Store 
+  VALUES (4, "hat", "yellow", 22.99, 1, 3);
+INSERT INTO Rubys_Store 
+  VALUES (5, "shirt", "tie dye", 14.99, 3, 9);
+INSERT INTO Rubys_Store 
+  VALUES (6, "shirt", "tie dye blue", 14.99, 4, 11);
+INSERT INTO Rubys_Store 
+  VALUES (7, "jeans", "white wash", 34.99, 6, 17);
+INSERT INTO Rubys_Store 
+  VALUES (8, "jeans", "dark blue", 33.99, 4, 14);
+INSERT INTO Rubys_Store 
+  VALUES (9, "jean shorts", "white wash", 27.99, 6, 7);
+INSERT INTO Rubys_Store 
+  VALUES (10, "shirt", "long sleeve orange", 21.99, 2, 16);
+INSERT INTO Rubys_Store 
+  VALUES (11, "flip flops", "orange", 10.99, 7, 23);
+INSERT INTO Rubys_Store 
+  VALUES (12, "flip flops", "baby blue", 10.99, 8, 13);
+INSERT INTO Rubys_Store 
+  VALUES (13, "flip flops", "pink", 10.99, 6, 21);
+INSERT INTO Rubys_Store 
+  VALUES (14, "shoes", "happy friends", 13.99, 3, 14);
+INSERT INTO Rubys_Store 
+  VALUES (15, "shirt", "purple", 16.99, 3, 21);
+
+SELECT * FROM 
+  Rubys_Store;
+
+SELECT 
+  SUM(sold) 
+FROM 
+  Rubys_Store;
+
+SELECT 
+  clothing, price 
+FROM 
+  Rubys_Store 
+WHERE 
+  price > 20.00 
+ORDER BY 
+  price;
