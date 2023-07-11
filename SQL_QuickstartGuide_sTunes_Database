@@ -64,3 +64,421 @@ FROM
 	invoices
 ORDER BY
 	Total DESC;
+/* CREATED BY: RUBY SMITH
+CREATED ON: 7/2/2023
+DESCRIPTION: THIS TABLE SHOWS TOP 10 TOTALS IN THE INVOICEDATE, BILLINGADDRESS, BILLINGCITY, AND TOTAL FROM INVOICES BETWEEN 01-01-2009 AND 12-31-2009 */
+
+SELECT
+	InvoiceDate,
+	BillingAddress,
+	BillingCity,
+	Total
+FROM
+	invoices
+WHERE
+	DATE(invoicedate) BETWEEN "2009-01-01" AND "2009-12-31"
+ORDER BY 
+	total DESC
+LIMIT 10;
+
+/* CREATED BY: RUBY SMITH
+CREATED ON: 7/2/2023
+DESCRIPTION: This table shows InvoiceDate, BillingAddress, Billingcity, Billingstate, BillingCountry and a Case Statement 
+from invoices where Totals in Domestic sales are over $15 ordered by BillingState. Fields renamed. */
+
+SELECT 
+	InvoiceDate AS "Date of Purchase",
+	Total,
+	BillingAddress AS "Address",
+	Billingcity AS "City",
+	BillingState AS "State",
+	BillingCountry AS "Country",
+	CASE
+	WHEN BillingCountry = "USA" THEN "Domestic Sales"
+	ELSE "Foreign Sales"
+	END AS SalesType
+FROM 
+	invoices
+WHERE
+	Salestype = "Domestic Sales" AND TOTAL > 15.00
+ORDER BY
+	State;
+	
+/* CREATED BY: RUBY SMITH
+CREATED ON: 7/6/2023
+DESCRIPTION: Example: Owner wants to see how diverse the songs we have available are. This table shows a inner joining of tables tracks and genres with a count of tracks in each genre grouped by genreID and ordered by count in descending order.*/
+
+SELECT
+	g.name AS Genre,
+	COUNT(t.genreid) AS "Tracks in Genre"
+FROM
+	tracks AS t
+INNER JOIN
+	genres AS g
+ON
+	t.GenreId = g.GenreId
+GROUP BY
+	t.GenreId
+ORDER BY
+	"Tracks In Genre" DESC;
+
+/* CREATED BY: RUBY SMITH
+CREATED ON: 07/08/2023
+DESCRIPTION: CHECKPOINT (Inner join between albums and tracks. Display the album names and track names in a single result set. After, inner join genres and include the name field.)- THIS TABLE SHOWS AN INNER JOINING OF THE TABLES, ALBUMS, TRACKS, AND GENRES.
+IT SHOWS ALL THE COMPOSERS AND NAMES FROM TRACKS, ALL THE TITLES FROM ALBUMS, AND NAMES ASSOCIATED FROM GENRES TO EACH TRACK NAME ORDERED BY TITLES (ascending). Fields renamed. */
+
+SELECT
+	g.name AS GenreType,
+	t.Composer AS Artist,
+	a.Title AS AlbumTitle,
+	t.name AS SongTitle
+FROM
+	albums AS a
+INNER JOIN
+	tracks AS t
+ON
+	a.AlbumId = t.AlbumId
+INNER JOIN
+	genres AS g
+ON
+	g.GenreId = t.GenreId
+ORDER BY
+	AlbumTitle ASC;
+
+/* CREATED BY: RUBY SMITH
+CREATED ON: 07/08/2023
+DESCRIPTION: CHECKPOINT (use the substr() function with the proper case function to create a list of customers with the last name listed first in capital letters, and only the first initial of the first name.)
+This table shows a list by LastName and first letter of FirstName from customers in all capital letters. */
+
+SELECT
+	UPPER(LastName) ||', '|| SUBSTR(FirstName,1,1) AS "OUR CUSTOMERS"
+FROM
+	customers;
+	
+/* CREATED BY: RUBY SMITH
+CREATED ON: 07/08/2023
+DESCRIPTION: CHECKPOINT (sTunes celebrates employees birthdays on the first of the month. Create a table for HR that shows employee names, birthdays, and the celebration day.)
+THIS TABLE SHOWS LASTNAME, FIRSTNAME, TITLE, AND BIRTHDATE FROM EMPLOYEES. IT SHOWS THE CELEBRATION DAY OF EACH EMPLOYEE ORDERED BY CELEBRATION DATE. FIELDS RENAMED.  */
+	
+SELECT
+	UPPER(LastName) ||', '|| UPPER(FirstName) AS "Full Name",
+	Title AS "Job Title",
+	STRFTIME('%Y-%m-%d',BirthDate) AS "Birthdate",
+	STRFTIME('%m-1',Birthdate) AS "Celebration Date"
+FROM
+	Employees
+ORDER BY
+	"Celebration Date";
+	
+/* CREATED BY: RUBY SMITH
+CREATED ON: 07/08/2023
+DESCRIPTION: CHECKPOINT (Some employees age is a sensitive topic. Instead of birthday, use hire date.) THIS TABLE SHOWS FULL NAMES OF ALL EMPLOYEES, WHEN EACH EMPLOYEE WAS HIRED, HOW LONG THEY HAVE BEEN WITH 
+sTUNES, AND THEIR CELEBRATION DAY ORDERED BY THEIR CELEBRATION DAY (Decending). FIELDS RENAMED.*/	
+
+SELECT
+	UPPER(LastName) ||', '|| UPPER(FirstName) AS "Full Name",
+	Title AS "Job Title",
+	STRFTIME('%Y-%m-%d',HireDate) ||',   '|| (STRFTIME('%Y-%m-%d','now') - STRFTIME('%Y-%m-%d',HireDate)) AS "Date of Hire & Year(s)",
+	STRFTIME('%m-1',HireDate) AS "Celebration Day"
+FROM
+	employees
+ORDER BY
+	"Celebration Day" ASC;
+	
+/* CREATED BY: RUBY SMITH
+CREATED ON: 07/08/2023
+DESCRIPTION: CHECKPOINT (sTunes owner wants us to calculate the average invoice amount by billing city.) THIS TABLE SHOWS THE AVERAGE SALES (Rounded by 2) OF EACH CITY GROUPED BY BILLINGCITY AND ORDERED BY BILLINGCOUNTRY (Ascending). FIELDS RENAMED.*/
+
+SELECT
+	BillingCity ||', '|| BillingCountry AS "Billing Cities",
+	ROUND(AVG(Total),2) AS "Avg Sales"
+FROM	
+	invoices
+GROUP BY
+	BillingCity
+ORDER BY
+	BillingCountry;
+
+/* CREATED BY: RUBY SMITH
+CREATED ON: 07/09/2023
+DESCRIPTION: CHECKPOINT (Create a single-line mailing list for all US customers, including capitalized full names and full addresses with five-digit zip codes.) THIS TABLE SHOWS FULL NAME, ADDRESS,  
+AND (5-DIGIT) POSTALCODE AS A MAILING LIST FROM CUSTOMERS IN THE USA ORDERED BY STATE THEN CITY. FIELD RENAMED.*/
+
+SELECT
+	UPPER(FirstName) ||' '|| UPPER(LastName) ||' '|| Address ||', '|| City ||', '|| State ||' '|| SUBSTR(PostalCode,1,5) AS "Domestic Customer Mailing List"
+FROM
+	customers
+WHERE
+	Country = "USA"
+ORDER BY
+State, City;
+
+/* CREATED BY: RUBY SMITH
+CREATED ON: 07/09/2023
+DESCRIPTION: CHECKPOINT (What are the average annual sales generated by customers from the USA from the years of data available?) THIS TABLE SHOWS A ROUNDED AVERAGE OF TOTALS AND 
+COUNT OF INVOICES GROUPED BY EACH COUNTRY AND ORDERED BY THE COUNT (decending) THEN COUNTRIES. FIELDS RENAMED*/
+
+SELECT
+	BillingCountry AS Countries,
+	ROUND(AVG(Total),2) AS "Average Sales",
+	COUNT(InvoiceId) AS "# of Orders"
+FROM
+	invoices
+GROUP BY 
+	BillingCountry
+ORDER BY
+	"# of Orders" DESC, Countries;
+	
+/* CREATED BY: RUBY SMITH
+CREATED ON: 07/09/2023
+DESCRIPTION: CHECKPOINT (What are the company's all-time total sales?) THIS TABLE SHOWS THE SUM OF THE TOTAL FROM INVOICES. FIELD RENAMED.*/
+
+SELECT
+	SUM(Total) AS "All-time Total Sales"
+FROM
+	invoices;
+
+/* CREATED BY: RUBY SMITH
+CREATED ON: 07/09/2023
+DESCRIPTION: CHECKPOINT (Who are the top ten best customers from a revenue standpoint?) THIS INNER JOINED TABLE SHOWS THE FULL NAME FROM CUSTOMERS AND A SUM OF THE TOTAL FROM 
+INVOICES GROUPED BY INV CUSTOMERID. IT IS ORDERED BY THE SUM OF THE TOTAL (Descending) AND LIMITED TO THE TOP 10. FIELDS RENAMED. */
+
+SELECT
+	c.FirstName ||' '|| c.LastName AS "Customer Name",
+	SUM(i.total) AS "Revenue Generated"
+FROM
+	customers AS c
+INNER JOIN
+	invoices AS i
+ON
+	c.CustomerId = i.CustomerId
+GROUP BY
+	i.CustomerId
+ORDER BY
+	"Revenue Generated" DESC
+LIMIT 10;
+
+/* CREATED BY: RUBY SMITH
+CREATED ON: 07/09/2023
+DESCRIPTION: CHECKPOINT (How many invoices were recorded on or before Jan 1, 2010, that were above the average invoice amount?) THIS TABLE SHOWS ALL THE ROWS HIGHER THAN THE 
+TOTAL AVERAGE ON OR BEFORE JAN 1,2010 IN INVOICES. IT CONTAINS A SUBQUERY FOR THE TOTAL AVERAGE AND ORDERED BY TOTAL (Descending). FIELDS RENAMED. */
+
+SELECT
+	DATE(InvoiceDate) AS "Date",
+	InvoiceId,
+	BillingCity AS City,
+	total
+FROM
+	invoices
+WHERE
+	InvoiceDate <= '2010-01-01' AND Total >
+	(SELECT
+		AVG(Total)
+	FROM
+		invoices)
+ORDER BY
+	Total DESC;
+
+/* CREATED BY: RUBY SMITH
+CREATED ON: 07/09/2023
+DESCRIPTION: CHECKPOINT (How many invoices exceeed the average invoice amount generated in 2010?) THIS TABLE SHOWS THE NUMBER OF INVOICES THAT HAVE A GREATER TOTAL THAN THE AVERAGE TOTAL OF 2010. */
+
+SELECT
+	AVG(Total) AS "2010 Avg Total"
+FROM 
+	invoices
+WHERE
+	DATE(InvoiceDate) BETWEEN '2010-01-01' AND '2010-12-31';
+
+	
+	
+SELECT
+	COUNT(invoiceID) AS "# of Invoices"
+FROM
+	invoices
+WHERE
+	Total > 
+	(SELECT
+		AVG(Total)
+	FROM 
+		invoices
+	WHERE
+		DATE(InvoiceDate) BETWEEN '2010-01-01' AND '2010-12-31');
+		
+/* CREATED BY: RUBY SMITH
+CREATED ON: 07/09/2023
+DESCRIPTION: CHECKPOINT (Who are the customers responsible for these invoices? Previous Checkpoint for Reference) THIS TABLE SHOWS ALL INVOICES AND CUSTOMERS ASSOCIATED WITH EACH INVOICE 
+WHOSE TOTAL WAS GREATER THAN THE 2010 AVERAGE TOTAL. ORDERED BY TOTAL (Decending). FIELDS RENAMED. */		
+
+SELECT
+	DATE(i.InvoiceDate) AS "Invoice Date",
+	c.FirstName ||' '|| c.LastName AS "Full Name",
+	c.City ||', '|| c.Country AS Location,
+	i.Total
+FROM
+	invoices AS i	
+INNER JOIN
+	customers AS c
+ON
+	i.CustomerId = c.CustomerId
+WHERE
+	Total > 
+		(SELECT
+			AVG(Total)
+		FROM 
+			invoices
+		WHERE
+			DATE(InvoiceDate) BETWEEN '2010-01-01' AND '2010-12-31')
+ORDER BY
+	i.Total DESC;
+	
+/* CREATED BY: RUBY SMITH
+CREATED ON: 07/09/2023
+DESCRIPTION: CHECKPOINT (How many of these customers are from the USA? Previous Checkpoint for Reference) THIS TABLE SHOWS ALL "USA" INVOICES AND CUSTOMERS ASSOCIATED WITH EACH INVOICE 
+WHOSE TOTAL WAS GREATER THAN THE 2010 AVERAGE TOTAL. ORDERED BY TOTAL (Decending). FIELDS RENAMED.*/
+
+SELECT
+	DATE(i.InvoiceDate) AS "Invoice Date",
+	c.FirstName ||' '|| c.LastName AS "Full Name",
+	i.BillingCity ||', '|| i.billingState AS Location,
+	i.Total
+FROM
+	invoices AS i	
+INNER JOIN
+	customers AS c
+ON
+	i.CustomerId = c.CustomerId
+WHERE
+	Total > 
+		(SELECT
+			AVG(Total)
+		FROM 
+			invoices
+		WHERE
+			DATE(InvoiceDate) BETWEEN '2010-01-01' AND '2010-12-31') AND c.country = "USA"
+ORDER BY
+	i.Total DESC, DATE(i.invoicedate);
+	
+/* CREATED BY: RUBY SMITH (Copied from book. It needs to be created for later checkpoint)
+CREATED ON: 07/09/2023
+DESCRIPTION: CHECKPOINT (Create View. Copied from book pg 158 for later checkpoint.)  */
+
+CREATE VIEW V_AvgTotal_Rounded AS
+	SELECT
+		ROUND(AVG(Total), 2) AS "Average Total"
+	FROM
+		invoices;
+		
+/* CREATED BY: RUBY SMITH 
+CREATED ON: 07/10/2023
+DESCRIPTION: CHECKPOINT (Create View from previous subquery.) VIEWS CREATED FOR EACH YEAR AVERAGE TOTAL FROM INVOICES. FIELD RENAMED. */
+
+CREATE VIEW V_2010_AvgTotal AS
+	SELECT
+			AVG(Total) AS "2010 Average Total"
+		FROM 
+			invoices
+		WHERE
+			DATE(InvoiceDate) BETWEEN '2010-01-01' AND '2010-12-31';
+
+CREATE VIEW V_2009_AvgTotal AS
+	SELECT
+			AVG(Total) AS "2009 Average Total"
+		FROM 
+			invoices
+		WHERE
+			DATE(InvoiceDate) BETWEEN '2009-01-01' AND '2009-12-31';
+
+CREATE VIEW V_2011_AvgTotal AS
+	SELECT
+			AVG(Total) AS "2011 Average Total"
+		FROM 
+			invoices
+		WHERE
+			DATE(InvoiceDate) BETWEEN '2011-01-01' AND '2011-12-31';	
+
+CREATE VIEW V_2012_AvgTotal AS
+	SELECT
+			AVG(Total) AS "2012 Average Total"
+		FROM 
+			invoices
+		WHERE
+			DATE(InvoiceDate) BETWEEN '2012-01-01' AND '2012-12-31';	
+		
+CREATE VIEW V_2013_AvgTotal AS
+	SELECT
+			AVG(Total) AS "2013 Average Total"
+		FROM 
+			invoices
+		WHERE
+			DATE(InvoiceDate) BETWEEN '2013-01-01' AND '2013-12-31';		
+
+/* CREATED BY: RUBY SMITH 
+CREATED ON: 07/10/2023
+DESCRIPTION: THIS TABLE SHOWS THE OVERALL TOTAL AVERAGE OF EACH CITY COMPARED TO EACH YEARS GLOBAL TOTAL AVERAGE AND THE OVERALL GLOVAL TOTAL AVERAGE IN INVOICES. VIEW CREATED.  */
+
+CREATE VIEW V_bCityAVG_YearlyAVG_OverallAVG AS
+SELECT
+	BillingCity AS "Billing City",
+	ROUND(AVG(Total),2) AS "Overall City Average",
+	ROUND((	Select
+		*
+	FROM
+		V_2012_AvgTotal),2) AS "2009 Global Average",
+	ROUND((Select
+		*
+	FROM
+		V_2010_AvgTotal),2) AS "2010 Global Average",
+	ROUND((Select
+		*
+	FROM
+		V_2011_AvgTotal),2) AS "2011 Global Average",
+	ROUND((Select
+		*
+	FROM
+		V_2012_AvgTotal),2) AS "2012 Global Average",
+	ROUND((Select
+		*
+	FROM
+		V_2010_AvgTotal),2) AS "2013 Global Average",
+	ROUND((Select
+		*
+	FROM
+		V_AvgTotal),2) AS "Overall Global Average"
+FROM
+	invoices	
+GROUP BY
+	BillingCity
+ORDER BY
+	BillingCity;
+
+/* CREATED BY: RUBY SMITH 
+CREATED ON: 07/10/2023
+DESCRIPTION: THESE STATEMENTS SHOW DATA MANIPULATION.*/
+
+INSERT INTO artists (name)
+VALUES ('Bob Marley');
+
+INSERT INTO artists (name)
+VALUES ('Doja Cat');
+
+DELETE FROM artists
+WHERE ArtistId = 278;
+
+INSERT INTO employees
+VALUES ('9', 'Brown', 'Jasmine', 'Sales Support Agent', '2', '1991-04-18', '2019-01-25', '2541 Melborne Ave', 'McHenry', 'IL', 'United States', '60051', '(847) 422-4252', '', 'jbrown91@gmail.com');
+
+INSERT INTO employees
+VALUES ('10', 'Gray', 'Michael', 'Sales Support Agent', '2', '1990-06-11', '2019-01-25', '44 Jackson Ct', 'McHenry', 'IL', 'United States', '60050', '(847) 574-6666', '', 'mgray1990@gmail.com');
+
+UPDATE
+	employees
+SET BirthDate = '1990-06-11 00:00:00'
+WHERE
+	EmployeeId = 10;
+
+UPDATE
+	employees
+SET HireDate = '2019-01-25 00:00:00'
+WHERE
+	EmployeeId = 9;
