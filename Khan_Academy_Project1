@@ -1,3 +1,46 @@
+SELECT * 
+FROM movies;
+
+SELECT * 
+FROM movies 
+WHERE release_year > 2000 
+ORDER BY release_year;
+________________________________________________________________________________________________________________________________________
+SELECT title 
+FROM songs;
+
+SELECT title 
+FROM songs 
+WHERE mood = "epic" OR released > 1990;
+
+SELECT title 
+FROM songs 
+WHERE mood = "epic" AND released > 1990 AND duration < 240;
+________________________________________________________________________________________________________________________________________
+SELECT title 
+FROM songs 
+WHERE artist = "Queen";
+
+SELECT name 
+FROM artists 
+WHERE genre = "Pop";
+
+SELECT title 
+FROM songs 
+WHERE artist 
+  IN (SELECT name FROM artists WHERE genre = "Pop");
+________________________________________________________________________________________________________________________________________
+SELECT author AS 'Author', SUM(words) AS 'total_words'
+FROM books
+GROUP BY Author
+HAVING SUM(words) > 1000000;
+
+SELECT author AS 'Author', AVG(words) AS 'Avg_Words'
+FROM books
+GROUP BY Author
+HAVING AVG(words) > 150000; 
+
+_______________________________________________________________________________________________________________________________________
 Create your own store! Your store should sell one type of things, like clothing or bikes, whatever you want your store to specialize in. 
 You should have a table for all the items in your store, and at least 5 columns for the kind of data you think you'd need to store. 
 You should sell at least 15 items, and use select statements to order your items by price and show at least one statistic about the items.
