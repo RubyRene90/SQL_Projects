@@ -389,3 +389,163 @@ FROM
 WHERE legendary LIKE 'false' AND (type_1 LIKE 'psychic' OR type_2 LIKE 'psychic')
 ORDER BY
     total DESC;
+
+_______________________________________________________________________________________________________________________________
+INSERT INTO persons (name, age) VALUES ("Abe Smith", 9);
+INSERT INTO hobbies (person_id, name) VALUES (6, "video games");
+
+
+SELECT 
+  persons.name, 
+  hobbies.name 
+FROM 
+  persons
+JOIN 
+  hobbies
+ON 
+  hobbies.person_id = persons.id; 
+
+SELECT 
+  persons.name, 
+  hobbies.name 
+FROM 
+  persons
+JOIN 
+  hobbies
+ON 
+  hobbies.person_id = persons.id
+WHERE 
+  persons.name LIKE "Bobby McBobbyFace";
+
+_____________________________________________________________________________________________________________________
+SELECT 
+  customers.name, 
+  customers.email, 
+  orders.item, 
+  orders.price
+FROM 
+  customers
+LEFT OUTER JOIN 
+  orders
+ON 
+  customers.id = orders.customer_id;
+
+SELECT 
+  customers.name, 
+  customers.email, 
+  TOTAL(orders.price)
+FROM 
+  customers
+LEFT OUTER JOIN 
+  orders
+ON 
+  customers.id = orders.customer_id
+GROUP BY 
+  customers.name
+ORDER BY 
+  TOTAL(orders.price) DESC;
+
+_______________________________________________________________________________________________________________
+SELECT
+  movies.title AS 'Movie Title', 
+  s.title AS 'Sequel Title'
+FROM 
+  movies
+LEFT OUTER JOIN 
+  movies s 
+ON 
+  movies.sequel_id = s.id; 
+
+_______________________________________________________________________________________________________________
+
+SELECT 
+  persons.fullname, 
+  hobbies.name
+FROM 
+  persons
+JOIN 
+  hobbies
+ON 
+  persons.id = hobbies.person_id; 
+
+
+SELECT 
+  a.fullname,  
+  b.fullname
+FROM 
+  friends
+JOIN 
+  persons a
+ON 
+  a.id = friends.person1_id
+JOIN  
+  persons b
+ON 
+  b.id = friends.person2_id;
+
+_______________________________________________________________________________________________________________
+
+CREATE TABLE 
+  Movie_Stars (id INTEGER PRIMARY KEY, fullname TEXT, age INTEGER);
+
+INSERT INTO Movie_Stars (fullname, age) VALUES ('Daniel Radcliff', 33);
+INSERT INTO Movie_Stars (fullname, age) VALUES ('Robert Downey Jr.', 58);
+INSERT INTO Movie_Stars (fullname, age) VALUES ('Emma Watson', 33);
+INSERT INTO Movie_Stars (fullname, age) VALUES ('Johnny Depp', 60);
+INSERT INTO Movie_Stars (fullname, age) VALUES ('Chris Evans', 42);
+INSERT INTO Movie_Stars (fullname, age) VALUES ('Jennifer Lawrence', 32);
+
+
+CREATE TABLE 
+  Movies (id INTEGER PRIMARY KEY, Star_id INTEGER, Movie TEXT);
+
+INSERT INTO Movies (Star_id, Movie) VALUES (1, 'Harry Potter and the Chamber of Secrets');
+INSERT INTO Movies (Star_id, Movie) VALUES (1, 'The Lost City');
+INSERT INTO Movies (Star_id, Movie) VALUES (2, 'Iron Man');
+INSERT INTO Movies (Star_id, Movie) VALUES (2, 'Sherlock Holmes');
+INSERT INTO Movies (Star_id, Movie) VALUES (1, 'Harry Potter and the Deathly Hallows');
+INSERT INTO Movies (Star_id, Movie) VALUES (3, 'Harry Potter and the Chamber of Secrets');
+INSERT INTO Movies (Star_id, Movie) VALUES (5, 'Captain America');
+INSERT INTO Movies (Star_id, Movie) VALUES (4, 'Charlie and the Chocolate Factory');
+INSERT INTO Movies (Star_id, Movie) VALUES (4, 'Blow');
+INSERT INTO Movies (Star_id, Movie) VALUES (5, 'Avengers');
+INSERT INTO Movies (Star_id, Movie) VALUES (4, 'Pirates of the Caribbean');
+INSERT INTO Movies (Star_id, Movie) VALUES (3, 'Beauty and the Beast');
+INSERT INTO Movies (Star_id, Movie) VALUES (6, 'Hunger Games');
+INSERT INTO Movies (Star_id, Movie) VALUES (2, 'Avengers');
+INSERT INTO Movies (Star_id, Movie) VALUES (6, 'X-Men: First Class');
+
+CREATE TABLE 
+  Costars (id INTEGER PRIMARY KEY, Costar1_id INTEGER, Costar2_id INTEGER);
+
+INSERT INTO Costars (Costar1_id, Costar2_id) VALUES (2, 5);
+INSERT INTO Costars (Costar1_id, Costar2_id) VALUES (1, 3);
+
+SELECT * 
+  FROM Movie_Stars;
+SELECT * 
+  FROM Movies;
+
+SELECT 
+  Movie_Stars.fullname AS 'Actor/Actress' , Movies.Movie AS 'Title'
+FROM 
+  Movie_Stars
+JOIN 
+  Movies
+ON 
+  Movie_Stars.id = Movies.Star_id
+ORDER BY 
+  Movie_Stars.fullname ASC;
+
+SELECT 
+  a.fullname AS 'Costar A', b.fullname AS 'Costar B'
+FROM 
+  costars
+JOIN 
+  Movie_stars a
+ON 
+  costars.costar1_id = a.id
+JOIN 
+  Movie_stars b
+ON 
+  costars.costar2_id = b.id;
