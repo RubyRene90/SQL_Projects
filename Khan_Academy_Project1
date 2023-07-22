@@ -549,3 +549,86 @@ JOIN
   Movie_stars b
 ON 
   costars.costar2_id = b.id;
+
+_____________________________________________________________________________________________
+
+SELECT * 
+  FROM documents;
+
+UPDATE documents 
+  SET author = 'Jackie Draper' 
+WHERE 
+  Author = 'Jackie Paper';
+
+SELECT * 
+  FROM documents;
+
+DELETE FROM documents
+WHERE 
+  id = 5;
+
+SELECT * 
+  FROM documents;
+
+__________________________________________________________________________________________________
+ALTER TABLE clothes 
+  ADD 'price' INTEGER;
+
+SELECT * 
+  FROM clothes;
+
+UPDATE clothes SET price = 10
+    WHERE id=1;
+UPDATE clothes SET price = 20
+    WHERE id=2;
+UPDATE clothes SET price = 30
+    WHERE id=3;
+
+SELECT * 
+  FROM clothes;
+
+INSERT INTO clothes ('type', design, price) 
+  VALUES ('blouse', 'blue silk button up', 25);
+
+SELECT * 
+  FROM clothes;
+
+______________________________________________________________________________________________________
+CREATE TABLE achievements (id INTEGER PRIMARY KEY AUTOINCREMENT, game_title TEXT, achievement_title TEXT, points INTEGER);
+
+INSERT INTO achievements (game_title, achievement_title, points) 
+  VALUES ('Grounded', 'Landed', 10);
+INSERT INTO achievements (game_title, achievement_title, points) 
+  VALUES ('Halo 4', 'Blarg', 35);
+INSERT INTO achievements (game_title, achievement_title, points) 
+  VALUES ('Halo 4', 'Bringin Home the Bacon', 50);
+INSERT INTO achievements (game_title, achievement_title, points) 
+  VALUES ('Minecraft', 'You died....again', 10);
+INSERT INTO achievements (game_title, achievement_title, points) 
+  VALUES ('Minecraft', 'Trading around', 10);
+INSERT INTO achievements (game_title, achievement_title, points) 
+  VALUES ('Minecraft', 'Bling Bling', 25);
+INSERT INTO achievements (game_title, achievement_title, points) 
+  VALUES ('DeadSpace 2', 'Get away from me', 10);
+INSERT INTO achievements (game_title, achievement_title, points) 
+  VALUES ('Deadspace 2', '1000th kill', 50);
+
+SELECT * 
+  FROM achievements;
+
+UPDATE achievements SET achievement_title = "Kick the Baby!"
+    WHERE id = 7;
+
+SELECT * 
+  FROM achievements;
+
+UPDATE achievements SET points = 25
+    WHERE id = 7;
+
+SELECT * 
+  FROM achievements;
+
+DELETE FROM achievements WHERE id = 1;
+
+SELECT * 
+  FROM achievements;
