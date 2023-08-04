@@ -3,10 +3,10 @@ CREATED ON: 6/28/2023
 DESCRIPTION: THIS TABLE SHOWS THE FIRST TEN CUSTOMERS LAST AND FIRST NAME, EMAIL, AND PHONE ORDERED BY LAST NAME (ASCENDING) THEN FIRST NAME (DESCENDING) */
 
 SELECT
-	LastName AS "Last Name",
-	FirstName AS "First Name",
-	Email AS "Email Address", 
-	Phone AS "Contact #"
+	LastName AS 'Last Name',
+	FirstName AS 'First Name',
+	Email AS 'Email Address', 
+	Phone AS 'Contact #'
 FROM 
 	customers
 ORDER BY
@@ -25,7 +25,7 @@ FROM
 WHERE
 	LastName
 like
-	"b%";
+	'b%';
 	
 /* CREATED BY: RUBY SMITH
 CREATED ON: 6/28/2023
@@ -56,14 +56,15 @@ CREATED ON: 6/28/2023
 DESCRIPTION: THIS TABLE SHOWS THE TOTAL, TOTAL INCLUDING TAX, INVOICE ID, AND CUSTOMER ID FROM INVOICES IN ORDERED BY TOTAL (Descending) */
 
 SELECT
-	Total AS "Original Amount",
-	Total * 1.15 AS "Including Tax",
-	InvoiceId AS "Order #",
+	Total AS 'Original Amount',
+	Total * 1.15 AS 'Including Tax',
+	InvoiceId AS 'Order #',
 	CustomerId
 FROM
 	invoices
 ORDER BY
 	Total DESC;
+	
 /* CREATED BY: RUBY SMITH
 CREATED ON: 7/2/2023
 DESCRIPTION: THIS TABLE SHOWS TOP 10 TOTALS IN THE INVOICEDATE, BILLINGADDRESS, BILLINGCITY, AND TOTAL FROM INVOICES BETWEEN 01-01-2009 AND 12-31-2009 */
@@ -87,20 +88,20 @@ DESCRIPTION: This table shows InvoiceDate, BillingAddress, Billingcity, Billings
 from invoices where Totals in Domestic sales are over $15 ordered by BillingState. Fields renamed. */
 
 SELECT 
-	InvoiceDate AS "Date of Purchase",
+	InvoiceDate AS 'Date of Purchase',
 	Total,
-	BillingAddress AS "Address",
-	Billingcity AS "City",
-	BillingState AS "State",
-	BillingCountry AS "Country",
+	BillingAddress AS 'Address',
+	Billingcity AS 'City',
+	BillingState AS 'State',
+	BillingCountry AS 'Country',
 	CASE
-	WHEN BillingCountry = "USA" THEN "Domestic Sales"
-	ELSE "Foreign Sales"
-	END AS SalesType
+	WHEN BillingCountry = 'USA' THEN 'Domestic Sales'
+	ELSE 'Foreign Sales'
+	END AS 'SalesType'
 FROM 
 	invoices
 WHERE
-	Salestype = "Domestic Sales" AND TOTAL > 15.00
+	Salestype = 'Domestic Sales' AND TOTAL > 15.00
 ORDER BY
 	State;
 	
@@ -110,7 +111,7 @@ DESCRIPTION: Example: Owner wants to see how diverse the songs we have available
 
 SELECT
 	g.name AS Genre,
-	COUNT(t.genreid) AS "Tracks in Genre"
+	COUNT(t.genreid) AS 'Tracks in Genre'
 FROM
 	tracks AS t
 INNER JOIN
@@ -120,7 +121,7 @@ ON
 GROUP BY
 	t.GenreId
 ORDER BY
-	"Tracks In Genre" DESC;
+	'Tracks In Genre' DESC;
 
 /* CREATED BY: RUBY SMITH
 CREATED ON: 07/08/2023
@@ -128,10 +129,10 @@ DESCRIPTION: CHECKPOINT (Inner join between albums and tracks. Display the album
 IT SHOWS ALL THE COMPOSERS AND NAMES FROM TRACKS, ALL THE TITLES FROM ALBUMS, AND NAMES ASSOCIATED FROM GENRES TO EACH TRACK NAME ORDERED BY TITLES (ascending). Fields renamed. */
 
 SELECT
-	g.name AS GenreType,
-	t.Composer AS Artist,
-	a.Title AS AlbumTitle,
-	t.name AS SongTitle
+	g.name AS 'GenreType',
+	t.Composer AS 'Artist',
+	a.Title AS 'AlbumTitle',
+	t.name AS 'SongTitle'
 FROM
 	albums AS a
 INNER JOIN
@@ -151,7 +152,7 @@ DESCRIPTION: CHECKPOINT (use the substr() function with the proper case function
 This table shows a list by LastName and first letter of FirstName from customers in all capital letters. */
 
 SELECT
-	UPPER(LastName) ||', '|| SUBSTR(FirstName,1,1) AS "OUR CUSTOMERS"
+	UPPER(LastName) ||', '|| SUBSTR(FirstName,1,1) AS 'OUR CUSTOMERS'
 FROM
 	customers;
 	
@@ -161,14 +162,14 @@ DESCRIPTION: CHECKPOINT (sTunes celebrates employees birthdays on the first of t
 THIS TABLE SHOWS LASTNAME, FIRSTNAME, TITLE, AND BIRTHDATE FROM EMPLOYEES. IT SHOWS THE CELEBRATION DAY OF EACH EMPLOYEE ORDERED BY CELEBRATION DATE. FIELDS RENAMED.  */
 	
 SELECT
-	UPPER(LastName) ||', '|| UPPER(FirstName) AS "Full Name",
-	Title AS "Job Title",
-	STRFTIME('%Y-%m-%d',BirthDate) AS "Birthdate",
-	STRFTIME('%m-1',Birthdate) AS "Celebration Date"
+	UPPER(LastName) ||', '|| UPPER(FirstName) AS 'Full Name',
+	Title AS 'Job Title',
+	STRFTIME('%Y-%m-%d',BirthDate) AS 'Birthdate',
+	STRFTIME('%m-1',Birthdate) AS 'Celebration Date'
 FROM
 	Employees
 ORDER BY
-	"Celebration Date";
+	'Celebration Date';
 	
 /* CREATED BY: RUBY SMITH
 CREATED ON: 07/08/2023
@@ -176,22 +177,22 @@ DESCRIPTION: CHECKPOINT (Some employees age is a sensitive topic. Instead of bir
 sTUNES, AND THEIR CELEBRATION DAY ORDERED BY THEIR CELEBRATION DAY (Decending). FIELDS RENAMED.*/	
 
 SELECT
-	UPPER(LastName) ||', '|| UPPER(FirstName) AS "Full Name",
-	Title AS "Job Title",
-	STRFTIME('%Y-%m-%d',HireDate) ||',   '|| (STRFTIME('%Y-%m-%d','now') - STRFTIME('%Y-%m-%d',HireDate)) AS "Date of Hire & Year(s)",
-	STRFTIME('%m-1',HireDate) AS "Celebration Day"
+	UPPER(LastName) ||', '|| UPPER(FirstName) AS 'Full Name',
+	Title AS 'Job Title',
+	STRFTIME('%Y-%m-%d',HireDate) ||',   '|| (STRFTIME('%Y-%m-%d','now') - STRFTIME('%Y-%m-%d',HireDate)) AS 'Date of Hire & Year(s)',
+	STRFTIME('%m-1',HireDate) AS 'Celebration Day'
 FROM
 	employees
 ORDER BY
-	"Celebration Day" ASC;
+	'Celebration Day' ASC;
 	
 /* CREATED BY: RUBY SMITH
 CREATED ON: 07/08/2023
 DESCRIPTION: CHECKPOINT (sTunes owner wants us to calculate the average invoice amount by billing city.) THIS TABLE SHOWS THE AVERAGE SALES (Rounded by 2) OF EACH CITY GROUPED BY BILLINGCITY AND ORDERED BY BILLINGCOUNTRY (Ascending). FIELDS RENAMED.*/
 
 SELECT
-	BillingCity ||', '|| BillingCountry AS "Billing Cities",
-	ROUND(AVG(Total),2) AS "Avg Sales"
+	BillingCity ||', '|| BillingCountry AS 'Billing Cities',
+	ROUND(AVG(Total),2) AS 'Avg Sales'
 FROM	
 	invoices
 GROUP BY
@@ -205,11 +206,11 @@ DESCRIPTION: CHECKPOINT (Create a single-line mailing list for all US customers,
 AND (5-DIGIT) POSTALCODE AS A MAILING LIST FROM CUSTOMERS IN THE USA ORDERED BY STATE THEN CITY. FIELD RENAMED.*/
 
 SELECT
-	UPPER(FirstName) ||' '|| UPPER(LastName) ||' '|| Address ||', '|| City ||', '|| State ||' '|| SUBSTR(PostalCode,1,5) AS "Domestic Customer Mailing List"
+	UPPER(FirstName) ||' '|| UPPER(LastName) ||' '|| Address ||', '|| City ||', '|| State ||' '|| SUBSTR(PostalCode,1,5) AS 'Domestic Customer Mailing List'
 FROM
 	customers
 WHERE
-	Country = "USA"
+	Country = 'USA'
 ORDER BY
 State, City;
 
@@ -219,22 +220,22 @@ DESCRIPTION: CHECKPOINT (What are the average annual sales generated by customer
 COUNT OF INVOICES GROUPED BY EACH COUNTRY AND ORDERED BY THE COUNT (decending) THEN COUNTRIES. FIELDS RENAMED*/
 
 SELECT
-	BillingCountry AS Countries,
-	ROUND(AVG(Total),2) AS "Average Sales",
-	COUNT(InvoiceId) AS "# of Orders"
+	BillingCountry AS 'Countries',
+	ROUND(AVG(Total),2) AS 'Average Sales',
+	COUNT(InvoiceId) AS '# of Orders'
 FROM
 	invoices
 GROUP BY 
 	BillingCountry
 ORDER BY
-	"# of Orders" DESC, Countries;
+	'# of Orders' DESC, 'Countries';
 	
 /* CREATED BY: RUBY SMITH
 CREATED ON: 07/09/2023
 DESCRIPTION: CHECKPOINT (What are the company's all-time total sales?) THIS TABLE SHOWS THE SUM OF THE TOTAL FROM INVOICES. FIELD RENAMED.*/
 
 SELECT
-	SUM(Total) AS "All-time Total Sales"
+	SUM(Total) AS 'All-time Total Sales'
 FROM
 	invoices;
 
@@ -244,8 +245,8 @@ DESCRIPTION: CHECKPOINT (Who are the top ten best customers from a revenue stand
 INVOICES GROUPED BY INV CUSTOMERID. IT IS ORDERED BY THE SUM OF THE TOTAL (Descending) AND LIMITED TO THE TOP 10. FIELDS RENAMED. */
 
 SELECT
-	c.FirstName ||' '|| c.LastName AS "Customer Name",
-	SUM(i.total) AS "Revenue Generated"
+	c.FirstName ||' '|| c.LastName AS 'Customer Name',
+	SUM(i.total) AS 'Revenue Generated'
 FROM
 	customers AS c
 INNER JOIN
@@ -255,7 +256,7 @@ ON
 GROUP BY
 	i.CustomerId
 ORDER BY
-	"Revenue Generated" DESC
+	'Revenue Generated' DESC
 LIMIT 10;
 
 /* CREATED BY: RUBY SMITH
@@ -264,9 +265,9 @@ DESCRIPTION: CHECKPOINT (How many invoices were recorded on or before Jan 1, 201
 TOTAL AVERAGE ON OR BEFORE JAN 1,2010 IN INVOICES. IT CONTAINS A SUBQUERY FOR THE TOTAL AVERAGE AND ORDERED BY TOTAL (Descending). FIELDS RENAMED. */
 
 SELECT
-	DATE(InvoiceDate) AS "Date",
+	DATE(InvoiceDate) AS 'Date',
 	InvoiceId,
-	BillingCity AS City,
+	BillingCity AS 'City',
 	total
 FROM
 	invoices
@@ -284,7 +285,7 @@ CREATED ON: 07/09/2023
 DESCRIPTION: CHECKPOINT (How many invoices exceeed the average invoice amount generated in 2010?) THIS TABLE SHOWS THE NUMBER OF INVOICES THAT HAVE A GREATER TOTAL THAN THE AVERAGE TOTAL OF 2010. */
 
 SELECT
-	AVG(Total) AS "2010 Avg Total"
+	AVG(Total) AS '2010 Avg Total'
 FROM 
 	invoices
 WHERE
@@ -293,7 +294,7 @@ WHERE
 	
 	
 SELECT
-	COUNT(invoiceID) AS "# of Invoices"
+	COUNT(invoiceID) AS '# of Invoices'
 FROM
 	invoices
 WHERE
@@ -311,9 +312,9 @@ DESCRIPTION: CHECKPOINT (Who are the customers responsible for these invoices? P
 WHOSE TOTAL WAS GREATER THAN THE 2010 AVERAGE TOTAL. ORDERED BY TOTAL (Decending). FIELDS RENAMED. */		
 
 SELECT
-	DATE(i.InvoiceDate) AS "Invoice Date",
-	c.FirstName ||' '|| c.LastName AS "Full Name",
-	c.City ||', '|| c.Country AS Location,
+	DATE(i.InvoiceDate) AS 'Invoice Date',
+	c.FirstName ||' '|| c.LastName AS 'Full Name',
+	c.City ||', '|| c.Country AS 'Location',
 	i.Total
 FROM
 	invoices AS i	
@@ -338,9 +339,9 @@ DESCRIPTION: CHECKPOINT (How many of these customers are from the USA? Previous 
 WHOSE TOTAL WAS GREATER THAN THE 2010 AVERAGE TOTAL. ORDERED BY TOTAL (Decending). FIELDS RENAMED.*/
 
 SELECT
-	DATE(i.InvoiceDate) AS "Invoice Date",
-	c.FirstName ||' '|| c.LastName AS "Full Name",
-	i.BillingCity ||', '|| i.billingState AS Location,
+	DATE(i.InvoiceDate) AS 'Invoice Date',
+	c.FirstName ||' '|| c.LastName AS 'Full Name',
+	i.BillingCity ||', '|| i.billingState AS 'Location',
 	i.Total
 FROM
 	invoices AS i	
@@ -355,102 +356,93 @@ WHERE
 		FROM 
 			invoices
 		WHERE
-			DATE(InvoiceDate) BETWEEN '2010-01-01' AND '2010-12-31') AND c.country = "USA"
+			DATE(InvoiceDate) BETWEEN '2010-01-01' AND '2010-12-31') AND c.country = 'USA'
 ORDER BY
 	i.Total DESC, DATE(i.invoicedate);
 	
-/* CREATED BY: RUBY SMITH (Copied from book. It needs to be created for later checkpoint)
-CREATED ON: 07/09/2023
-DESCRIPTION: CHECKPOINT (Create View. Copied from book pg 158 for later checkpoint.)  */
-
-CREATE VIEW V_AvgTotal_Rounded AS
-	SELECT
-		ROUND(AVG(Total), 2) AS "Average Total"
-	FROM
-		invoices;
 		
 /* CREATED BY: RUBY SMITH 
 CREATED ON: 07/10/2023
 DESCRIPTION: CHECKPOINT (Create View from previous subquery.) VIEWS CREATED FOR EACH YEAR AVERAGE TOTAL FROM INVOICES. FIELD RENAMED. */
 
-CREATE VIEW V_2010_AvgTotal AS
-	SELECT
-			AVG(Total) AS "2010 Average Total"
-		FROM 
-			invoices
-		WHERE
-			DATE(InvoiceDate) BETWEEN '2010-01-01' AND '2010-12-31';
-
+DROP VIEW IF EXISTS V_2009_AvgTotal;			
 CREATE VIEW V_2009_AvgTotal AS
 	SELECT
-			AVG(Total) AS "2009 Average Total"
-		FROM 
-			invoices
-		WHERE
-			DATE(InvoiceDate) BETWEEN '2009-01-01' AND '2009-12-31';
-
+		BillingCity,
+		AVG(Total) AS '2009 Average Total'
+	FROM 
+		invoices
+	WHERE
+		DATE(InvoiceDate) BETWEEN '2009-01-01' AND '2009-12-31'
+	GROUP BY 
+		BillingCity;
+			
+DROP VIEW IF EXISTS V_2010_AvgTotal;
+CREATE VIEW V_2010_AvgTotal AS
+	SELECT
+		BillingCity,
+		AVG(Total) AS '2010 Average Total'
+	FROM 
+		invoices
+	WHERE
+		DATE(InvoiceDate) BETWEEN '2010-01-01' AND '2010-12-31'
+	GROUP BY 
+		BillingCity;		
+			
+DROP VIEW IF EXISTS V_2011_AvgTotal;			
 CREATE VIEW V_2011_AvgTotal AS
 	SELECT
-			AVG(Total) AS "2011 Average Total"
-		FROM 
-			invoices
-		WHERE
-			DATE(InvoiceDate) BETWEEN '2011-01-01' AND '2011-12-31';	
+		BillingCity,
+		AVG(Total) AS '2011 Average Total'
+	FROM 
+		invoices
+	WHERE
+		DATE(InvoiceDate) BETWEEN '2011-01-01' AND '2011-12-31'
+	GROUP BY 
+		BillingCity;
 
+DROP VIEW IF EXISTS V_2012_AvgTotal;
 CREATE VIEW V_2012_AvgTotal AS
 	SELECT
-			AVG(Total) AS "2012 Average Total"
-		FROM 
-			invoices
-		WHERE
-			DATE(InvoiceDate) BETWEEN '2012-01-01' AND '2012-12-31';	
-		
+		BillingCity,
+		AVG(Total) AS '2012 Average Total'
+	FROM 
+		invoices
+	WHERE
+		DATE(InvoiceDate) BETWEEN '2012-01-01' AND '2012-12-31'
+	GROUP BY 
+		BillingCity;	
+
+DROP VIEW IF EXISTS V_2013_AvgTotal;			
 CREATE VIEW V_2013_AvgTotal AS
 	SELECT
-			AVG(Total) AS "2013 Average Total"
-		FROM 
-			invoices
-		WHERE
-			DATE(InvoiceDate) BETWEEN '2013-01-01' AND '2013-12-31';		
+		BillingCity,
+			AVG(Total) AS '2013 Average Total'
+	FROM 
+		invoices
+	WHERE
+		DATE(InvoiceDate) BETWEEN '2013-01-01' AND '2013-12-31'
+	GROUP BY
+		BillingCity;	
 
-/* CREATED BY: RUBY SMITH 
-CREATED ON: 07/10/2023
-DESCRIPTION: THIS TABLE SHOWS THE OVERALL TOTAL AVERAGE OF EACH CITY COMPARED TO EACH YEARS GLOBAL TOTAL AVERAGE AND THE OVERALL GLOVAL TOTAL AVERAGE IN INVOICES. VIEW CREATED.  */
+DROP VIEW IF EXISTS V_OVERALL_LOCATION_AVG;
+CREATE VIEW V_OVERALL_LOCATION_AVG AS
+	SELECT
+		BillingCity,
+		AVG(Total) AS 'Location Overall Average'
+	FROM 
+		invoices
+	GROUP BY 
+		BillingCity;
 
-CREATE VIEW V_bCityAVG_YearlyAVG_OverallAVG AS
-SELECT
-	BillingCity AS "Billing City",
-	ROUND(AVG(Total),2) AS "Overall City Average",
-	ROUND((	Select
-		*
-	FROM
-		V_2012_AvgTotal),2) AS "2009 Global Average",
-	ROUND((Select
-		*
-	FROM
-		V_2010_AvgTotal),2) AS "2010 Global Average",
-	ROUND((Select
-		*
-	FROM
-		V_2011_AvgTotal),2) AS "2011 Global Average",
-	ROUND((Select
-		*
-	FROM
-		V_2012_AvgTotal),2) AS "2012 Global Average",
-	ROUND((Select
-		*
-	FROM
-		V_2010_AvgTotal),2) AS "2013 Global Average",
-	ROUND((Select
-		*
-	FROM
-		V_AvgTotal),2) AS "Overall Global Average"
-FROM
-	invoices	
-GROUP BY
-	BillingCity
-ORDER BY
-	BillingCity;
+
+DROP TABLE IF EXISTS Global_Average;		
+CREATE TEMPORARY TABLE 'Global_Average' AS
+	SELECT
+		AVG(Total) AS 'Global Average'
+	FROM 
+		invoices;
+		
 
 /* CREATED BY: RUBY SMITH 
 CREATED ON: 07/10/2023
@@ -482,3 +474,4 @@ UPDATE
 SET HireDate = '2019-01-25 00:00:00'
 WHERE
 	EmployeeId = 9;
+	
