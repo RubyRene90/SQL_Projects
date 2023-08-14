@@ -1,18 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/User/Desktop/RUBY/Data_Projects/NashvilleHousing/Nashville_Housing.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="1"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2960"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,16:mainNashvilleHousing"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="NashvilleHousing" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="7" mode="0"/></sort><column_widths><column index="1" value="65"/><column index="2" value="108"/><column index="3" value="169"/><column index="4" value="168"/><column index="5" value="130"/><column index="6" value="93"/><column index="7" value="117"/><column index="8" value="98"/><column index="9" value="58"/><column index="10" value="300"/><column index="11" value="212"/><column index="12" value="136"/><column index="13" value="104"/><column index="14" value="93"/><column index="15" value="76"/><column index="16" value="67"/><column index="17" value="72"/><column index="18" value="58"/><column index="19" value="63"/><column index="20" value="177"/><column index="21" value="143"/><column index="22" value="179"/><column index="23" value="132"/><column index="24" value="67"/><column index="25" value="173"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="temp" name="NULLPROP" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="4" mode="0"/></sort><column_widths><column index="1" value="108"/><column index="2" value="254"/><column index="3" value="108"/><column index="4" value="133"/><column index="5" value="254"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">/* CREATED BY: RUBY SMITH
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/User/Desktop/RUBY/Data_Projects/NashvilleHousing/Nashville_Housing.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="1"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2960"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,16:mainNashvilleHousing"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="NashvilleHousing" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="7" mode="0"/></sort><column_widths><column index="1" value="65"/><column index="2" value="108"/><column index="3" value="169"/><column index="4" value="168"/><column index="5" value="130"/><column index="6" value="93"/><column index="7" value="117"/><column index="8" value="98"/><column index="9" value="58"/><column index="10" value="300"/><column index="11" value="212"/><column index="12" value="136"/><column index="13" value="104"/><column index="14" value="93"/><column index="15" value="76"/><column index="16" value="67"/><column index="17" value="72"/><column index="18" value="58"/><column index="19" value="63"/><column index="20" value="177"/><column index="21" value="143"/><column index="22" value="179"/><column index="23" value="132"/><column index="24" value="67"/><column index="25" value="173"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="temp" name="NULLPROP" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="4" mode="0"/></sort><column_widths><column index="1" value="108"/><column index="2" value="254"/><column index="3" value="108"/><column index="4" value="133"/><column index="5" value="254"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">
+_____________________________________________________________________
+/* CREATED BY: RUBY SMITH
 CREATED ON: 08/07/2023
 DESCRIPTION: LEARNING TO CLEAN DATA. CHECKING DATA.*/
 
 SELECT *
 FROM 
 	NashvilleHousing;
-	
-/*DESCRIPTION: FIXING NULL VALUES IN PropertyAddress FIELD. AFTER FOLLOWING ALONG WITH VIDEO, UNABLE TO MAKE SQL QUERIES SHOWN WORK ON SQLITE, EVEN AFTER LOOKING UP INFORMATION. 
-PLEASE REVIEW QUERY IN NOTES SECTION BELOW, I WOULD LIKE TO BE SHOWN HOW TO FIX IT. UPDATED RECORDS MY OWN WAY AND IT WORKED CORRECTLY. */	
+______________________________________________________________________	
+/*DESCRIPTION: FIXING NULL VALUES IN PropertyAddress FIELD. AFTER FOLLOWING ALONG WITH VIDEO, UNABLE TO MAKE SQL QUERIES SHOWN WORK ON SQLITE , EVEN AFTER LOOKING UP INFORMATION. 
+PLEASE REVIEW QUERY IN --NOTES SECTION--- BELOW, I WOULD LIKE TO BE SHOWN HOW TO FIX IT. UPDATED RECORDS MY OWN WAY AND IT WORKED CORRECTLY. */	
 
 SELECT *
 FROM
 	NashvilleHousing
 WHERE PropertyAddress IS NULL;
+
 
 SELECT
 	a.ParcelID,
@@ -108,8 +111,7 @@ UPDATE NashvilleHousing SET PropertyAddress = '7601  CHIPMUNK LN, NASHVILLE'
 	WHERE UniqueID = '51930';
 UPDATE NashvilleHousing SET PropertyAddress = '109  CEDAR PLACE BND, NASHVILLE'
 	WHERE UniqueID = '51703';
-
-
+__________________________________________________________________________
 /* DESCRIPTION: THE FOLLOWING QUERIES SHOW ALL PROPERTY ADDRESSES BEING UPDATED BY SEPERATING THE CITY FROM THE ADDRESS AND CREATING TWO NEW FIELDS. */
 
 SELECT	
@@ -117,25 +119,26 @@ SELECT
 FROM 
 	NashvilleHousing;
 
+
 SELECT 
 	SUBSTR(propertyaddress, 1, instr(PropertyAddress, ',') -1) AS 'Address',
 	SUBSTR(Propertyaddress, instr(PropertyAddress, ',') +2, LENGTH(Propertyaddress)) AS 'City'
 FROM NashvilleHousing;
 
+____________________
 ALTER TABLE NashvilleHousing
 ADD PropertySplit_Address TEXT;
 
 UPDATE NashvilleHousing
 SET PropertySplit_Address = SUBSTR(propertyaddress, 1, instr(PropertyAddress, ',') -1);
 
-__________________________
-
+_____________________
 ALTER TABLE NashvilleHousing
 ADD PropertySplit_City TEXT;
 
 UPDATE NashvilleHousing
 SET PropertySplit_City = SUBSTR(Propertyaddress, instr(PropertyAddress, ',') +2, LENGTH(Propertyaddress));
-
+________________________________________________________________
 /* DESCRIPTION: UPDATING THE OwnerAddress FIELD. SPLITTING INTO 3 FIELDS TO SEPERATE OWNER ADDRESS, CITY, AND STATE.  */
 
 SELECT 
@@ -143,18 +146,20 @@ SELECT
 FROM 
 	NashvilleHousing;
 
+
 SELECT 
 	OwnerAddress,
 	SUBSTR(OwnerAddress, 1, instr(OwnerAddress, ',') -1),
 	SUBSTR(OwnerAddress, instr(OwnerAddress, ',') +2, LENGTH(OwnerAddress))
 FROM NashvilleHousing;
 
+_________________
 ALTER TABLE NashvilleHousing
 ADD OwnerSplit_Address TEXT;
 
 UPDATE NashvilleHousing
 SET OwnerSplit_Address = SUBSTR(OwnerAddress, 1, instr(OwnerAddress, ',') -1);
-__________________________________________________
+__________________
 /* DELETE OWNERsplitCityState AFTER UPDATING. */
 
 ALTER TABLE NashvilleHousing
@@ -165,26 +170,26 @@ ADD OWNERsplitCityState TEXT;
 
 UPDATE NashvilleHousing
 SET OWNERsplitCityState = SUBSTR(OwnerAddress, instr(OwnerAddress, ',') +2, LENGTH(OwnerAddress));
-___________________________________________________
+____________________
 SELECT 
 	SUBSTR(OWNERsplitCityState, 1, instr(OWNERsplitCityState, ',') -1),
 	SUBSTR(OWNERsplitCityState, instr(OWNERsplitCityState, ',') +2, LENGTH(OWNERsplitCityState))
 FROM NashvilleHousing;
 
-
+____________________
 ALTER TABLE NashvilleHousing
 ADD OwnerSplit_City TEXT; 
 
 UPDATE NashvilleHousing
 SET OwnerSplit_City = SUBSTR(OWNERsplitCityState, 1, instr(OWNERsplitCityState, ',') -1);
-_____________________________________________________
-
+____________________
 ALTER TABLE NashvilleHousing
 ADD OwnerSplit_State TEXT;
 
 UPDATE NashvilleHousing
 SET OwnerSplit_State = SUBSTR(OWNERsplitCityState, instr(OWNERsplitCityState, ',') +2, LENGTH(OWNERsplitCityState));
 
+_______________________________________________________________________
 /* DESCRIPTION: UPDATING THE SoldAsVacant FIELD. */
 
 SELECT 
@@ -214,62 +219,68 @@ SET SoldAsVacant = 	CASE
 	WHEN SoldAsVacant = 'N' THEN 'No'
 	ELSE SoldAsVacant
 	END;
-	
-
+
+________________________________________________________________________________________
 /*  DESCRIPTION: REMOVING DUPLICATES */
-
-SELECT *,
-	ROW_NUMBER() OVER 
-(	
-	PARTITION BY 
-		ParcelID,
-		PropertyAddress,
-		SaleDate,
-		SalePrice,
-		LegalReference
-	ORDER BY UniqueID) AS 'RowNumber'
-FROM
-	NashvilleHousing;
-
-	
-WITH DuplicateCTE AS
-(
-SELECT *,
-	ROW_NUMBER() OVER 
-(	
-	PARTITION BY 
-		ParcelID,
-		PropertyAddress,
-		SaleDate,
-		SalePrice,
-		LegalReference
-	ORDER BY UniqueID) AS 'RowNumber'
-FROM
-	NashvilleHousing
-)
-
-SELECT *
-FROM DuplicateCTE
-WHERE RowNumber &gt; 1;
-
-/*  DESCRIPTION: THE EXAMPLE FOLLOWED IN VIDEO WAS NOT SUPPORTED BY SQLITE. DELETED ROWS WHERE THE UNIQUEID WAS DUPLICATED DATA FROM ABOVE QUERY. */
-
-DELETE FROM NashvilleHousing
-WHERE UniqueID IN (27111, 27112, 27113, 27114, 27115, 27116, 27117, 27118, 27119, 27120, 27121, 27122, 27123, 27124, 
-				27125, 27126, 27127, 27128, 27129, 27130, 27131, 27132, 27133, 27134, 27135, 27136, 27137, 27138, 27139, 
-				27140, 27347, 27348, 27349, 27350, 27351, 27352, 27353, 27141, 12620, 27354, 27355, 27356, 27357, 27358, 
-				27359, 12629, 27360, 27142, 27143, 27144, 27361, 27362, 27363, 27364, 27365, 27366, 12639, 27145, 27146, 
-				27147, 12642, 27367, 27368, 27369, 12649, 27370, 27371, 27372, 27373, 27374, 27375, 27376, 27377, 27378, 
-				27379, 27380, 12676, 27381, 27382, 27383, 27384, 27385, 27386, 27387, 27388, 27389, 27390, 27391, 12692, 
-				12693, 27392, 27393, 27394, 27395, 27396, 27397, 27398, 27399, 27400, 12702, 27401, 27402, 27403, 27404);
-
-/*  DESCRIPTION: REMOVING UNUSABLE COLUMNS. */
-
-ALTER TABLE NashvilleHousing
-DROP COLUMN PropertyAddress;
-
-ALTER TABLE NashvilleHousing
-DROP COLUMN OwnerAddress;
-
-ALTER TABLE NashvilleHousing
-DROP COLUMN TaxDistrict;</sql><current_tab id="0"/></tab_sql></sqlb_project>
+
+SELECT *,
+	ROW_NUMBER() OVER 
+(	
+	PARTITION BY 
+		ParcelID,
+		PropertyAddress,
+		SaleDate,
+		SalePrice,
+		LegalReference
+	ORDER BY UniqueID) AS 'RowNumber'
+FROM
+	NashvilleHousing;
+
+
+WITH DuplicateCTE AS
+(
+SELECT *,
+	ROW_NUMBER() OVER 
+(	
+	PARTITION BY 
+		ParcelID,
+		PropertyAddress,
+		SaleDate,
+		SalePrice,
+		LegalReference
+	ORDER BY UniqueID) AS 'RowNumber'
+FROM
+	NashvilleHousing
+)
+
+
+SELECT *
+FROM DuplicateCTE
+WHERE RowNumber > 1;
+
+__________________________
+/*  DESCRIPTION: THE EXAMPLE FOLLOWED IN VIDEO WAS NOT SUPPORTED BY SQLITE. DELETED ROWS WHERE THE UNIQUEID WAS DUPLICATED DATA FROM ABOVE QUERY. */
+
+DELETE FROM NashvilleHousing
+WHERE UniqueID IN (27111, 27112, 27113, 27114, 27115, 27116, 27117, 27118, 27119, 27120, 27121, 27122, 27123, 27124, 
+				27125, 27126, 27127, 27128, 27129, 27130, 27131, 27132, 27133, 27134, 27135, 27136, 27137, 27138, 27139, 
+				27140, 27347, 27348, 27349, 27350, 27351, 27352, 27353, 27141, 12620, 27354, 27355, 27356, 27357, 27358, 
+				27359, 12629, 27360, 27142, 27143, 27144, 27361, 27362, 27363, 27364, 27365, 27366, 12639, 27145, 27146, 
+				27147, 12642, 27367, 27368, 27369, 12649, 27370, 27371, 27372, 27373, 27374, 27375, 27376, 27377, 27378, 
+				27379, 27380, 12676, 27381, 27382, 27383, 27384, 27385, 27386, 27387, 27388, 27389, 27390, 27391, 12692, 
+				12693, 27392, 27393, 27394, 27395, 27396, 27397, 27398, 27399, 27400, 12702, 27401, 27402, 27403, 27404);
+
+_______________________________________________________________________________________
+/*  DESCRIPTION: REMOVING UNUSABLE COLUMNS. */
+
+ALTER TABLE NashvilleHousing
+DROP COLUMN PropertyAddress;
+
+_______________________
+ALTER TABLE NashvilleHousing
+DROP COLUMN OwnerAddress;
+_______________________
+ALTER TABLE NashvilleHousing
+DROP COLUMN TaxDistrict;
+
+</sql><current_tab id="0"/></tab_sql></sqlb_project>
