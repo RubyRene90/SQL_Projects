@@ -1,0 +1,21 @@
+/* DATE: 07/16/2024
+CREATED BY: RUBY SMITH
+GOAL: FIND AVERAGE TREE DIAMETER FOR THREE DIFFERENT DATASETS */
+
+SELECT
+  AVG(diameter) AS Tree_AvgDiameter,--11.4398
+  1995 as year
+FROM bigquery-public-data.new_york_trees.tree_census_1995
+UNION ALL
+SELECT 
+  AVG(tree_dbh),--12.8335
+  2005 
+FROM bigquery-public-data.new_york_trees.tree_census_2005
+UNION ALL
+SELECT
+  AVG(tree_dbh),--11.2798
+  2015
+FROM bigquery-public-data.new_york_trees.tree_census_2015
+ORDER BY
+  year;
+  __________________________________________________________________________________________________________-
