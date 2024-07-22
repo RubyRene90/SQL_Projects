@@ -1,6 +1,6 @@
 SELECT * 
 FROM movies;
-
+________________________________________________________________________________________________________________________________________
 SELECT * 
 FROM movies 
 WHERE release_year > 2000 
@@ -8,11 +8,11 @@ ORDER BY release_year;
 ________________________________________________________________________________________________________________________________________
 SELECT title 
 FROM songs;
-
+________________________________________________________________________________________________________________________________________
 SELECT title 
 FROM songs 
 WHERE mood = "epic" OR released > 1990;
-
+________________________________________________________________________________________________________________________________________
 SELECT title 
 FROM songs 
 WHERE mood = "epic" AND released > 1990 AND duration < 240;
@@ -20,11 +20,11 @@ ________________________________________________________________________________
 SELECT title 
 FROM songs 
 WHERE artist = "Queen";
-
+________________________________________________________________________________________________________________________________________
 SELECT name 
 FROM artists 
 WHERE genre = "Pop";
-
+________________________________________________________________________________________________________________________________________
 SELECT title 
 FROM songs 
 WHERE artist 
@@ -34,12 +34,11 @@ SELECT author AS 'Author', SUM(words) AS 'total_words'
 FROM books
 GROUP BY Author
 HAVING SUM(words) > 1000000;
-
+________________________________________________________________________________________________________________________________________
 SELECT author AS 'Author', AVG(words) AS 'Avg_Words'
 FROM books
 GROUP BY Author
 HAVING AVG(words) > 150000; 
-
 _______________________________________________________________________________________________________________________________________
 Create your own store! Your store should sell one type of things, like clothing or bikes, whatever you want your store to specialize in. 
 You should have a table for all the items in your store, and at least 5 columns for the kind of data you think you'd need to store. 
@@ -77,15 +76,15 @@ INSERT INTO Rubys_Store
   VALUES (14, "shoes", "happy friends", 13.99, 3, 14);
 INSERT INTO Rubys_Store 
   VALUES (15, "shirt", "purple", 16.99, 3, 21);
-
+________________________________________________________________________________________________________________________________________
 SELECT * FROM 
   Rubys_Store;
-
+________________________________________________________________________________________________________________________________________
 SELECT 
   SUM(sold) 
 FROM 
   Rubys_Store;
-
+________________________________________________________________________________________________________________________________________
 SELECT 
   clothing, price 
 FROM 
@@ -94,8 +93,7 @@ WHERE
   price > 20.00 
 ORDER BY 
   price;
-
-___________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________________________________
 SELECT
     NAME, NUMBER_GRADE, ROUND(FRACTION_COMPLETED * 100) as "PERCENT_COMPLETED"
 FROM
@@ -113,7 +111,6 @@ FROM
     STUDENT_GRADES
 GROUP BY 
     LETTER_GRADE;
-
 ____________________________________________________________________________________________________________________
 COPIED ((TABLE ONLY)) FROM https://gist.github.com/pamelafox/26b9357c6120d3d0d27c2b90c950e8c6
 
@@ -138,7 +135,7 @@ CREATE TABLE pokemon(
 INSERT INTO pokemon(Number,Name,Type_1,Type_2,Total,HP,Attack,Defense,Sp_Atk,Sp_Def,Speed,Generation,Legendary) VALUES (1,'Bulbasaur','Grass','Poison',318,45,49,49,65,65,45,1,'False');
 INSERT INTO pokemon(Number,Name,Type_1,Type_2,Total,HP,Attack,Defense,Sp_Atk,Sp_Def,Speed,Generation,Legendary) VALUES (2,'Ivysaur','Grass','Poison',405,60,62,63,80,80,60,1,'False');
 ETC.
-_______________________________________________________________________________________________________
+________________________________________________________________________________________________________________________________________
 SELECT 
     ROUND(AVG(total),1) AS 'avg_total',
     ROUND(AVG(HP),1) AS 'avg_HP',
@@ -148,7 +145,7 @@ SELECT
     ROUND(AVG(Sp_Def),1) AS 'avg_def',
     ROUND(AVG(Speed),1) AS 'avg_speed'
 FROM pokemon;
-
+________________________________________________________________________________________________________________________________________
 SELECT 
     MAX(total) AS 'Max_total',
     MAX(HP) AS 'Max_HP',
@@ -158,7 +155,7 @@ SELECT
     MAX(Sp_Def) AS 'Max_def',
     MAX(Speed) AS 'Max_speed'
 FROM pokemon;
-
+________________________________________________________________________________________________________________________________________
 SELECT 
     MIN(total) AS 'Min_total',
     MIN(HP) AS 'Min_HP',
@@ -168,7 +165,7 @@ SELECT
     MIN(Sp_Def) AS 'Min_def',
     MIN(Speed) AS 'Min_speed'
 FROM pokemon;
-
+________________________________________________________________________________________________________________________________________
 /* THIS TABLE SHOWS THE TOP 5 STRONGEST TYPE_1 GROUPS THAT HAVE A HIGHER TOTAL AVERAGE THAN THE OVERALL AVERAGE OF 425.8 */
 SELECT 
     Type_1 AS 'Pokemon Type', 
@@ -183,7 +180,7 @@ HAVING
 ORDER BY
     AVG(total) DESC
 LIMIT(5);
-    
+ ________________________________________________________________________________________________________________________________________   
 /* THIS TABLE SHOWS HOW FAST EACH POKEMON IS BY GROUPING THE SPEED STAT WITH A CASE STATEMENT */
 SELECT
     number, 
@@ -200,7 +197,7 @@ FROM
     Pokemon
 ORDER BY
     number;
-    
+________________________________________________________________________________________________________________________________________    
 /* THIS TABLE SHOWS THE AVERAGE SIGHTING OF EACH TYPE_1 OF POKEMON WITH A CASE STATEMENT */
 SELECT
     type_1 AS 'Main Typing', 
@@ -214,7 +211,7 @@ FROM
     pokemon
 GROUP BY
     type_1;
-
+________________________________________________________________________________________________________________________________________
  /*THIS TABLE SHOWS ALL POKEMON THAT ARE PSYCHIC AND NOT LEGENDARY*/   
 SELECT 
    number,
@@ -227,8 +224,7 @@ FROM
 WHERE legendary LIKE 'false' AND (type_1 LIKE 'psychic' OR type_2 LIKE 'psychic')
 ORDER BY
     total DESC;
-
-_______________________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________________________________
 INSERT INTO persons (name, age) VALUES ("Abe Smith", 9);
 INSERT INTO hobbies (person_id, name) VALUES (6, "video games");
 
