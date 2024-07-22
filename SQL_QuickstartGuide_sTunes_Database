@@ -13,7 +13,6 @@ ORDER BY
 	LastName ASC,
 	FirstName DESC
 	LIMIT 10;
-
 ____________________________________________________________________________________________________________________
 /* CREATED BY: RUBY SMITH
 CREATED ON: 6/28/2023
@@ -27,7 +26,6 @@ WHERE
 	LastName
 like
 	'b%';
-
 ____________________________________________________________________________________________
 /* CREATED BY: RUBY SMITH
 CREATED ON: 6/28/2023
@@ -39,7 +37,6 @@ FROM
 	customers
 ORDER BY
 	Company DESC;
-
 _______________________________________________________________________________________________
 /* CREATED BY: RUBY SMITH
 CREATED ON: 6/28/2023
@@ -53,7 +50,6 @@ FROM
 	customers
 ORDER BY
 	PostalCode ASC;
-
 _________________________________________________________________________________________________
 /* CREATED BY: RUBY SMITH
 CREATED ON: 6/28/2023
@@ -68,7 +64,6 @@ FROM
 	invoices
 ORDER BY
 	Total DESC;
-
 _________________________________________________________________________________________________
 /* CREATED BY: RUBY SMITH
 CREATED ON: 7/2/2023
@@ -86,7 +81,6 @@ WHERE
 ORDER BY 
 	total DESC
 LIMIT 10;
-
 _________________________________________________________________________________________________
 /* CREATED BY: RUBY SMITH
 CREATED ON: 7/2/2023
@@ -110,7 +104,6 @@ WHERE
 	Salestype = 'Domestic Sales' AND TOTAL > 15.00
 ORDER BY
 	State;
-
 _________________________________________________________________________________________________
 /* CREATED BY: RUBY SMITH
 CREATED ON: 7/6/2023
@@ -129,7 +122,6 @@ GROUP BY
 	t.GenreId
 ORDER BY
 	'Tracks In Genre' DESC;
-
 _________________________________________________________________________________________________
 /* CREATED BY: RUBY SMITH
 CREATED ON: 07/08/2023
@@ -153,7 +145,6 @@ ON
 	g.GenreId = t.GenreId
 ORDER BY
 	AlbumTitle ASC;
-
 _________________________________________________________________________________________________
 /* CREATED BY: RUBY SMITH
 CREATED ON: 07/08/2023
@@ -164,7 +155,6 @@ SELECT
 	UPPER(LastName) ||', '|| SUBSTR(FirstName,1,1) AS 'OUR CUSTOMERS'
 FROM
 	customers;
-
 _________________________________________________________________________________________________
 /* CREATED BY: RUBY SMITH
 CREATED ON: 07/08/2023
@@ -180,7 +170,6 @@ FROM
 	Employees
 ORDER BY
 	'Celebration Date';
-
 _________________________________________________________________________________________________
 /* CREATED BY: RUBY SMITH
 CREATED ON: 07/08/2023
@@ -196,7 +185,6 @@ FROM
 	employees
 ORDER BY
 	'Celebration Day' ASC;
-
 _________________________________________________________________________________________________
 /* CREATED BY: RUBY SMITH
 CREATED ON: 07/08/2023
@@ -211,7 +199,6 @@ GROUP BY
 	BillingCity
 ORDER BY
 	BillingCountry;
-
 _________________________________________________________________________________________________
 /* CREATED BY: RUBY SMITH
 CREATED ON: 07/09/2023
@@ -226,7 +213,6 @@ WHERE
 	Country = 'USA'
 ORDER BY
 State, City;
-
 _________________________________________________________________________________________________
 /* CREATED BY: RUBY SMITH
 CREATED ON: 07/09/2023
@@ -243,7 +229,6 @@ GROUP BY
 	BillingCountry
 ORDER BY
 	'# of Orders' DESC, 'Countries';
-
 _________________________________________________________________________________________________
 /* CREATED BY: RUBY SMITH
 CREATED ON: 07/09/2023
@@ -253,7 +238,6 @@ SELECT
 	SUM(Total) AS 'All-time Total Sales'
 FROM
 	invoices;
-
 _________________________________________________________________________________________________
 /* CREATED BY: RUBY SMITH
 CREATED ON: 07/09/2023
@@ -274,7 +258,6 @@ GROUP BY
 ORDER BY
 	'Revenue Generated' DESC
 LIMIT 10;
-
 _________________________________________________________________________________________________
 /* CREATED BY: RUBY SMITH
 CREATED ON: 07/09/2023
@@ -296,7 +279,6 @@ WHERE
 		invoices)
 ORDER BY
 	Total DESC;
-
 _________________________________________________________________________________________________
 /* CREATED BY: RUBY SMITH
 CREATED ON: 07/09/2023
@@ -323,7 +305,6 @@ WHERE
 		invoices
 	WHERE
 		DATE(InvoiceDate) BETWEEN '2010-01-01' AND '2010-12-31');
-
 _________________________________________________________________________________________________
 /* CREATED BY: RUBY SMITH
 CREATED ON: 07/09/2023
@@ -351,7 +332,6 @@ WHERE
 			DATE(InvoiceDate) BETWEEN '2010-01-01' AND '2010-12-31')
 ORDER BY
 	i.Total DESC;
-
 _________________________________________________________________________________________________
 /* CREATED BY: RUBY SMITH
 CREATED ON: 07/09/2023
@@ -379,7 +359,6 @@ WHERE
 			DATE(InvoiceDate) BETWEEN '2010-01-01' AND '2010-12-31') AND c.country = 'USA'
 ORDER BY
 	i.Total DESC, DATE(i.invoicedate);
-	
 _________________________________________________________________________________________________		
 /* CREATED BY: RUBY SMITH 
 CREATED ON: 07/10/2023
@@ -461,8 +440,7 @@ CREATE TEMPORARY TABLE 'Global_Average' AS
 	SELECT
 		AVG(Total) AS 'Global Average'
 	FROM 
-		invoices;
-		
+		invoices;		
 _________________________________________________________________________________________________
 /* CREATED BY: RUBY SMITH 
 CREATED ON: 07/10/2023
@@ -494,4 +472,3 @@ UPDATE
 SET HireDate = '2019-01-25 00:00:00'
 WHERE
 	EmployeeId = 9;
-	
