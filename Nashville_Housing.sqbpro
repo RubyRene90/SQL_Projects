@@ -32,8 +32,7 @@ JOIN NashvilleHousing AS b
 ON a.ParcelID = b.ParcelID
 AND a.UniqueID &lt;&gt; b.UniqueID
 WHERE b.PropertyAddress IS NULL
-
-___________
+_______________________________________________________________________
 
 /*
 UPDATE NashvilleHousing
@@ -52,8 +51,7 @@ ON a.ParcelID = b.ParcelID
 AND a.UniqueID &lt;&gt; b.UniqueID
 WHERE b.PropertyAddress IS NULL) 
  */
-
- _______________________________________________________
+_______________________________________________________________________
  
 UPDATE NashvilleHousing SET PropertyAddress = '410  ROSEHILL CT, GOODLETTSVILLE'
 	WHERE UniqueID = '43076';
@@ -128,21 +126,19 @@ SELECT
 	SUBSTR(propertyaddress, 1, instr(PropertyAddress, ',') -1) AS 'Address',
 	SUBSTR(Propertyaddress, instr(PropertyAddress, ',') +2, LENGTH(Propertyaddress)) AS 'City'
 FROM NashvilleHousing;
-
-____________________
+_______________________________________________________________________
 ALTER TABLE NashvilleHousing
 ADD PropertySplit_Address TEXT;
 
 UPDATE NashvilleHousing
 SET PropertySplit_Address = SUBSTR(propertyaddress, 1, instr(PropertyAddress, ',') -1);
-
-_____________________
+_______________________________________________________________________
 ALTER TABLE NashvilleHousing
 ADD PropertySplit_City TEXT;
 
 UPDATE NashvilleHousing
 SET PropertySplit_City = SUBSTR(Propertyaddress, instr(PropertyAddress, ',') +2, LENGTH(Propertyaddress));
-________________________________________________________________
+_______________________________________________________________________
 /*  CREATED BY: RUBY SMITH
 CREATED ON: 08/07/2023
 DESCRIPTION: UPDATING THE OwnerAddress FIELD. SPLITTING INTO 3 FIELDS TO SEPERATE OWNER ADDRESS, CITY, AND STATE.  */
@@ -158,43 +154,40 @@ SELECT
 	SUBSTR(OwnerAddress, 1, instr(OwnerAddress, ',') -1),
 	SUBSTR(OwnerAddress, instr(OwnerAddress, ',') +2, LENGTH(OwnerAddress))
 FROM NashvilleHousing;
-
-_________________
+_______________________________________________________________________
 ALTER TABLE NashvilleHousing
 ADD OwnerSplit_Address TEXT;
 
 UPDATE NashvilleHousing
 SET OwnerSplit_Address = SUBSTR(OwnerAddress, 1, instr(OwnerAddress, ',') -1);
-__________________
+_______________________________________________________________________
 /* DELETE OWNERsplitCityState AFTER UPDATING. */
 
 ALTER TABLE NashvilleHousing
 DROP OWNERsplitCityState;
-__________________
+_________________________________________________________________________________________
 ALTER TABLE NashvilleHousing
 ADD OWNERsplitCityState TEXT;
 
 UPDATE NashvilleHousing
 SET OWNERsplitCityState = SUBSTR(OwnerAddress, instr(OwnerAddress, ',') +2, LENGTH(OwnerAddress));
-____________________
+_______________________________________________________________________
 SELECT 
 	SUBSTR(OWNERsplitCityState, 1, instr(OWNERsplitCityState, ',') -1),
 	SUBSTR(OWNERsplitCityState, instr(OWNERsplitCityState, ',') +2, LENGTH(OWNERsplitCityState))
 FROM NashvilleHousing;
-
-____________________
+_______________________________________________________________________
 ALTER TABLE NashvilleHousing
 ADD OwnerSplit_City TEXT; 
 
 UPDATE NashvilleHousing
 SET OwnerSplit_City = SUBSTR(OWNERsplitCityState, 1, instr(OWNERsplitCityState, ',') -1);
-____________________
+_______________________________________________________________________
 ALTER TABLE NashvilleHousing
 ADD OwnerSplit_State TEXT;
 
 UPDATE NashvilleHousing
 SET OwnerSplit_State = SUBSTR(OWNERsplitCityState, instr(OWNERsplitCityState, ',') +2, LENGTH(OWNERsplitCityState));
-
 _______________________________________________________________________
 /* CREATED BY: RUBY SMITH
 CREATED ON: 08/09/2023
@@ -227,8 +220,7 @@ SET SoldAsVacant = 	CASE
 	WHEN SoldAsVacant = 'N' THEN 'No'
 	ELSE SoldAsVacant
 	END;
-
-________________________________________________________________________________________
+_______________________________________________________________________
 /* CREATED BY: RUBY SMITH
 CREATED ON: 08/09/2023
 DESCRIPTION: REMOVING DUPLICATES */
@@ -267,8 +259,7 @@ FROM
 SELECT *
 FROM DuplicateCTE
 WHERE RowNumber > 1;
-
-__________________________
+_______________________________________________________________________
 /* CREATED BY: RUBY SMITH
 CREATED ON: 08/09/2023
 DESCRIPTION: THE EXAMPLE FOLLOWED IN VIDEO WAS NOT SUPPORTED BY SQLITE. DELETED ROWS WHERE THE UNIQUEID WAS DUPLICATED DATA FROM ABOVE QUERY. */
@@ -281,19 +272,18 @@ WHERE UniqueID IN (27111, 27112, 27113, 27114, 27115, 27116, 27117, 27118, 27119
 				27147, 12642, 27367, 27368, 27369, 12649, 27370, 27371, 27372, 27373, 27374, 27375, 27376, 27377, 27378, 
 				27379, 27380, 12676, 27381, 27382, 27383, 27384, 27385, 27386, 27387, 27388, 27389, 27390, 27391, 12692, 
 				12693, 27392, 27393, 27394, 27395, 27396, 27397, 27398, 27399, 27400, 12702, 27401, 27402, 27403, 27404);
+_______________________________________________________________________
 
-_______________________________________________________________________________________
 /*  CREATED BY: RUBY SMITH
 CREATED ON: 08/09/2023
 DESCRIPTION: REMOVING UNUSABLE COLUMNS. */
 
 ALTER TABLE NashvilleHousing
 DROP COLUMN PropertyAddress;
-
-_______________________
+_______________________________________________________________________
 ALTER TABLE NashvilleHousing
 DROP COLUMN OwnerAddress;
-_______________________
+_______________________________________________________________________
 ALTER TABLE NashvilleHousing
 DROP COLUMN TaxDistrict;
 
