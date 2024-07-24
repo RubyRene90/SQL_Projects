@@ -1,0 +1,60 @@
+/* CREATED BY: RUBY SMITH
+CREATED ON: 07-24-2024
+GOAL: MAKE SURE THERE ARE ONLY TWO FUEL TYPES AVAILABLE IN CAR-INFO TABLE */
+
+SELECT
+  DISTINCT fuel_type
+FROM rs-project-01-429415.cars.cars_info;
+
+--OR
+
+SELECT
+  fuel_type
+FROM rs-project-01-429415.cars.cars_info
+WHERE
+  fuel_type <> 'gas' 
+  AND fuel_type <> 'diesel';
+________________________________________________________________________________________________________________
+
+/* CREATED BY: RUBY SMITH
+CREATED ON: 024-2024
+GOAL: DATA DESCRIPTION STATES THAT CAR LENGTHS SHOULD BE BETWEEN 141.1 AND 208.1. VERIFY */
+
+SELECT
+  MIN(length) AS min_length,
+  MAX(length) AS max_length
+FROM rs-project-01-429415.cars.cars_info;
+________________________________________________________________________________________________________________
+
+/* CREATED BY: RUBY SMITH
+CREATED ON: 024-2024
+GOAL: FILL IN MISSING DATA IN NUM_OF_DOORS COLUMN*/
+
+SELECT
+  *
+FROM rs-project-01-429415.cars.cars_info
+WHERE
+  num_of_doors IS NULL;
+
+--all dodge and mazda sedans have four doors. updating
+
+UPDATE rs-project-01-429415.cars.cars_info
+SET
+  num_of_doors = 'four'
+WHERE
+  make = 'dodge'
+  AND fuel_type = 'gas'
+  AND body_style = 'sedan';
+
+--ran previous query to see num_of_dorrs null updated. 
+
+UPDATE rs-project-01-429415.cars.cars_info
+SET
+  num_of_doors = 'four'
+WHERE
+  make = 'mazda'
+  AND fuel_type = 'diesel'
+  AND body_style = 'sedan';
+
+--ran previous query to see num_of_doors null updated.
+________________________________________________________________________________________________________________
