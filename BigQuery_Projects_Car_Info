@@ -14,8 +14,7 @@ FROM rs-project-01-429415.cars.cars_info
 WHERE
   fuel_type <> 'gas' 
   AND fuel_type <> 'diesel';
-________________________________________________________________________________________________________________
-
+___________________________________________________________________________________________________________
 /* CREATED BY: RUBY SMITH
 CREATED ON: 024-2024
 GOAL: DATA DESCRIPTION STATES THAT CAR LENGTHS SHOULD BE BETWEEN 141.1 AND 208.1. VERIFY */
@@ -24,11 +23,10 @@ SELECT
   MIN(length) AS min_length,
   MAX(length) AS max_length
 FROM rs-project-01-429415.cars.cars_info;
-________________________________________________________________________________________________________________
-
+___________________________________________________________________________________________________________
 /* CREATED BY: RUBY SMITH
 CREATED ON: 024-2024
-GOAL: FILL IN MISSING DATA IN NUM_OF_DOORS COLUMN*/
+GOAL: FILL IN MISSING DATA */
 
 SELECT
   *
@@ -57,4 +55,45 @@ WHERE
   AND body_style = 'sedan';
 
 --ran previous query to see num_of_doors null updated.
-________________________________________________________________________________________________________________
+___________________________________________________________________________________________________________
+/*CREATED BY: RUBY SMITH
+CREATED ON 07-25-2024
+GOAL: FIND ERRORS IN DATASET */
+
+SELECT
+  DISTINCT num_of_cylinders
+FROM rs-project-01-429415.cars.cars_info;
+
+--updating error 'tow' to 'two'
+
+UPDATE rs-project-01-429415.cars.cars_info
+SET
+  num_of_cylinders = 'two'
+WHERE
+  num_of_cylinders = 'tow';
+
+--ran previous query to make sure 'tow' was corrected.
+___________________________________________________________________________________________________________
+/*COMPRESSION_RATIO NEEDS TO BE BETWEEN 7 AND 23*/
+
+SELECT
+  MIN(compression_ratio) AS Min_Com_ratio,
+  MAX(compression_ratio) AS Max_Com_ratio
+FROM rs-project-01-429415.cars.cars_info;
+
+SELECT
+  compression_ratio
+FROM rs-project-01-429415.cars.cars_info
+ORDER BY
+  1 DESC;
+
+SELECT
+  COUNT(*) AS num_of_rows_to_delete
+FROM rs-project-01-429415.cars.cars_info
+WHERE
+  compression_ratio = 70;
+
+--Max ratio '70.0' needs to be updated. Told row was made in error, delete the 1 entry.
+
+DELETE rs-project-01-429415.cars.cars_info
+WHERE compression_ratio = 70;
