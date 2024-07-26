@@ -1,0 +1,41 @@
+/*CREATED BY: RUBY SMITH
+CREATED ON: 07/26/2024
+GOAL: LEARNING ADVANCED QUERIES CAST(), CONCAT(), and COALESCE() */
+
+SELECT
+  purchase_price
+FROM rs-project-01-429415.Laurens_Furniture_Store.customer_purchases 
+ORDER BY
+  purchase_price DESC;
+
+--purchase_price field incorrectly data typed, will be typecasting as FLOAT.
+
+SELECT
+  CAST(purchase_price AS FLOAT64)
+FROM rs-project-01-429415.Laurens_Furniture_Store.customer_purchases 
+ORDER BY
+  1 DESC;
+______________________________________________________________________________________________________________
+--Need to pull date and purchase_price for DEC 2020.
+--changed date column field data type casted as date instead of datetime.
+
+SELECT
+ CAST(date AS date) AS date_only,
+ purchase_price
+FROM rs-project-01-429415.Laurens_Furniture_Store.customer_purchases
+WHERE 
+  date between '2020-12-01' AND '2020-12-31';
+______________________________________________________________________________________________________________
+--Need to set up new category to see what color is more popular for each product, checking couches.
+
+SELECT
+  CONCAT(product_code, product_color) AS new_product_code
+FROM rs-project-01-429415.Laurens_Furniture_Store.customer_purchases
+WHERE 
+  product = 'couch';
+______________________________________________________________________________________________________________
+--using coalesce to work around null values on product field.
+
+SELECT
+  COALESCE(product, product_code) AS produce_info
+FROM rs-project-01-429415.Laurens_Furniture_Store.customer_purchases;
