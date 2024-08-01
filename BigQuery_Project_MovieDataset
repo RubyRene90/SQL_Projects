@@ -1,0 +1,38 @@
+/*CREATED BY: RUBY SMITH
+CREATED ON 7-31-2024
+GOAL: LEARNING BASIC FILTERING */
+
+SELECT
+  *
+FROM rs-project-01-429415.movie_data.movies
+WHERE
+  Genre = 'Comedy';
+___________________________________________________________________________________________
+/*CREATED BY:RUBY SMITH
+CREATED ON 8-1-2024
+GOAL: LEARNING BASIC SORTING */
+
+SELECT
+  *
+FROM rs-project-01-429415.movie_data.movies
+ORDER BY
+  `Release Date` DESC;
+___________________________________
+SELECT
+  *
+FROM rs-project-01-429415.movie_data.movies
+WHERE 
+  Genre = 'Comedy'
+ORDER BY
+  `Release Date` DESC;
+___________________________________
+SELECT
+  *
+FROM rs-project-01-429415.movie_data.movies
+WHERE 
+  Genre = 'Comedy'
+  AND
+  Revenue > 300000000
+ORDER BY
+  `Release Date` DESC;
+___________________________________
