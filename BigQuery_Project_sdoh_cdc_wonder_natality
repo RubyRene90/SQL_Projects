@@ -1,0 +1,36 @@
+/*CREATED BY: RUBY SMITH
+CREATED ON: 8-01-2024
+GOAL: PRACTICE QUIZ FOR SORTING */
+
+SELECT
+  *
+FROM bigquery-public-data.sdoh_cdc_wonder_natality.county_natality
+LIMIT 1000;
+__________________________________________________________________________
+SELECT 
+  *
+FROM bigquery-public-data.sdoh_cdc_wonder_natality.county_natality
+ORDER BY
+  Births
+LIMIT 10;
+__________________________________________________________________________
+SELECT 
+  *
+FROM bigquery-public-data.sdoh_cdc_wonder_natality.county_natality
+ORDER BY
+  Births DESC
+LIMIT 10;
+__________________________________________________________________________
+SELECT
+  *
+FROM bigquery-public-data.sdoh_cdc_wonder_natality.county_natality
+WHERE 
+  County_of_Residence = 'Erie County, NY'
+  OR
+  County_of_Residence = 'Niagara County, NY'
+  OR
+  County_of_Residence = 'Chautauqua County, NY'
+ORDER BY
+  County_of_Residence,
+  Year;
+__________________________________________________________________________
