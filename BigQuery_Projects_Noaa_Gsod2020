@@ -1,0 +1,57 @@
+/*CREATED BY: RUBY SMITH
+CREATED ON: 8-02-2024
+GOAL: OBTAIN TEMPERATURE, WIND SPEED, AND PRECIPITATION FOR STATIONS 'LA GUARDIA' AND 'JFK' FOR EVERY DAY IN 2020. REQUESTED TO BE IN DESCENDING ORDER BY DATE THEN ASCENDING ORDER BY STATION ID. */
+
+SELECT
+ date AS Date,
+ stn AS Station,
+ CASE
+  WHEN stn = '725030' THEN 'La Guardia'
+  WHEN stn = '744860' THEN 'JFK'
+  ELSE 'stn'
+  END AS Stn_Name,
+ IF(temp = 9999.9, null, temp) AS Temperature, --9999.9 is default for missing measurement, removed.
+ IF(wdsp = '999.9', null, CAST(wdsp AS float64)) AS WindSpeed, --999.9 is default for missing measurement, removed.
+ IF(prcp = 99.9, 0, prcp) AS Precipitation -- 99.9 is default for missing measurement, removed. 
+FROM bigquery-public-data.noaa_gsod.gsod2020
+WHERE
+  stn = '725030'
+  OR stn = '744860'
+ORDER BY
+  1 DESC,
+  2 ASC;
+_____________________________________________________________
+--CREATED NEW TABLE FROM ABOVE QUERY IN PROJECT FOLDER ON BIG QUERY TO MAKE FURTHER QUERIES
+_____________________________________________________________
+/*CREATED BY: RUBY SMITH
+CREATED ON: 8-02-2024
+GOAL: FIND AVG TEMP, WIND, AND PRECIPITATION IN NYC FOR JUNE 2020 */
+
+SELECT
+  AVG(Temperature) AS Avg_Temperature,
+  AVG(WindSpeed) AS Avg_WindSpeed,
+  AVG(Precipitation) AS Avg_Precipitation
+FROM rs-project-01-429415.demos.nyc_weather_2020
+WHERE 
+  Date BETWEEN '2020-06-01' AND '2020-06-30';
+_____________________________________________________________
+/*CREATED BY: RUBY SMITH
+CREATED ON: 8-02-2024
+GOAL: FIND THE MIN AND MAX TEMP, WIND, AND PRECIPITATION FOR JUNE 2020 */
+
+SELECT
+  MIN(Temperature) AS Min_Temperature,
+  MIN(WindSpeed) AS Min_WindSpeed,
+  MIN(Precipitation) AS Min_Precipitation
+FROM `rs-project-01-429415.demos.nyc_weather_2020`
+WHERE
+  Date BETWEEN '2020-06-01' AND '2020-06-30';
+_____________________________________________________________
+SELECT
+  MAX(Temperature) AS Max_Temperature,
+  MAX(WindSpeed) AS Max_WindSpeed,
+  MAX(Precipitation) AS Max_Precipitation
+FROM `rs-project-01-429415.demos.nyc_weather_2020`
+WHERE
+  Date BETWEEN '2020-06-01' AND '2020-06-30';
+_____________________________________________________________
