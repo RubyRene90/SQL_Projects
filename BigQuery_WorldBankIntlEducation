@@ -1,0 +1,29 @@
+/*CREATED BY: RUBY SMITH
+CREATED ON: 8-08-2024
+GOAL: FIND HOW MANY PEOPLE WERE THE OFFICIAL AGE FOR SECONDARY EDUCATION IN 2015 BY REGION. EXCLUDE MISSING REGIONS, SORT WITH HIGHEST POPULATED REGION FIRST */
+
+SELECT
+  DISTINCT(indicator_name)
+FROM
+  bigquery-public-data.world_bank_intl_education.international_education
+WHERE
+  indicator_name LIKE '%secondary education%';
+ --looking for correct indicator name for next query 'Population of the official age for secondary education, both sexes (number)'
+________________________________________________________________________
+SELECT
+  a.region AS region,
+  SUM(b.value) AS secondary_edu_pop
+FROM
+  bigquery-public-data.world_bank_intl_education.country_summary AS a
+JOIN
+  bigquery-public-data.world_bank_intl_education.international_education AS b
+ON
+  a.country_code = b.country_code
+WHERE
+  a.region IS NOT NULL
+  AND b.indicator_name = 'Population of the official age for secondary education, both sexes (number)'
+  AND b.year = 2015
+GROUP BY
+  region
+ORDER BY
+  2 DESC;
