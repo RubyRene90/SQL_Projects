@@ -1,0 +1,39 @@
+/*CREATED BY:RUBY SMITH
+CREATED ON: 8-08-2024
+GOAL: WORK WITH JOINS AND COUNT/COUNT DISTINCT STATMENTS*/
+
+SELECT
+  *
+FROM  `rs-project-01-429415.warehouse_orders.warehouse`;
+_____________________________________
+
+SELECT
+  *
+FROM  `rs-project-01-429415.warehouse_orders.orders`;
+_____________________________________
+
+SELECT
+  o.*,
+  w.warehouse_alias AS warehouse_name,
+  w.state AS state
+FROM `rs-project-01-429415.warehouse_orders.orders` AS o
+JOIN `rs-project-01-429415.warehouse_orders.warehouse`AS w
+ON o.warehouse_id = w.warehouse_id;
+_____________________________________
+
+SELECT
+ COUNT(DISTINCT w.state) AS num_of_states --use DISTINCT so it only returns distinct values for count
+FROM `rs-project-01-429415.warehouse_orders.orders` AS o
+JOIN `rs-project-01-429415.warehouse_orders.warehouse`AS w
+ON o.warehouse_id = w.warehouse_id;
+_____________________________________
+
+SELECT
+ w.state AS state,
+ COUNT(DISTINCT o.order_id) AS num_of_orders
+FROM `rs-project-01-429415.warehouse_orders.orders` AS o
+JOIN `rs-project-01-429415.warehouse_orders.warehouse`AS w
+ON o.warehouse_id = w.warehouse_id
+GROUP BY
+  1;
+_____________________________________
