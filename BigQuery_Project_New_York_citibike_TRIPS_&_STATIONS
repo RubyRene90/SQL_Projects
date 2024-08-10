@@ -1,0 +1,75 @@
+/*CREATED BY: RUBY SMITH
+CREATED ON: 8-05-2024
+GOAL: USE CONCAT IN SQL */
+
+SELECT
+  usertype,   --must use group by because its not aggregated
+  CONCAT(start_station_name, " to ", end_station_name) AS route,
+  COUNT(*) AS num_of_trips,
+  ROUND(AVG(tripduration/60),2) AS duration
+FROM bigquery-public-data.new_york.citibike_trips
+GROUP BY
+  start_station_name,
+  end_station_name,
+  usertype
+ORDER BY 
+  3 desc
+LIMIT 100;
+_____________________________________________________
+/*CREATED BY: RUBY SMITH
+CREATED ON : 8-10-2024
+GOAL: SUBQUERIES - COMPARE # OF BIKES AVAILABLE FROM EACH STATION TO AVG TOTAL AT ALL STATIONS */
+
+SELECT
+  station_id,
+  num_bikes_available,
+  (SELECT
+    ROUND(AVG(num_bikes_available),2)
+    FROM bigquery-public-data.new_york.citibike_stations) AS avg_bikes_available
+FROM bigquery-public-data.new_york.citibike_stations;
+
+/*CREATED BY: RUBY SMITH
+CREATED ON: 8-10-2024
+GOAL: SUBQUERIES IN FROM- CREATE HELPER TABLE TO CALCULATE TOTAL # OF RIDES STARTED AT EACH STATION*/
+_____________________________________________________
+SELECT
+  station_id,
+  name,
+  num_of_rides AS num_of_rides_from_start_station
+FROM
+  (
+    SELECT
+    CAST(start_station_id AS string) AS start_station_id_string,
+    COUNT(*) AS num_of_rides
+  FROM
+    bigquery-public-data.new_york.citibike_trips
+  GROUP BY 
+    1
+    ) AS station_num_of_trips
+JOIN
+  bigquery-public-data.new_york.citibike_stations
+ON
+  station_id = start_station_id_string
+ORDER BY
+  3 DESC;
+_____________________________________________________
+
+/*CREATED BY: RUBY SMITH
+CREATED ON: 8-10-2024
+GOAL: SUBQUERIES IN WHERE- FIND ONLY STATIONS THAT WERE USED BY SUBSCRIBERS*/
+
+SELECT
+  station_id,
+  name
+FROM
+  bigquery-public-data.new_york.citibike_stations
+WHERE
+  station_id IN
+  (
+    SELECT
+      CAST(start_station_id AS string) AS start_station_id_string
+      FROM
+        bigquery-public-data.new_york.citibike_trips
+      WHERE
+        usertype = 'Subscriber'
+  );
