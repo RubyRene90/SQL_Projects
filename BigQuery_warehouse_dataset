@@ -36,4 +36,53 @@ JOIN `rs-project-01-429415.warehouse_orders.warehouse`AS w
 ON o.warehouse_id = w.warehouse_id
 GROUP BY
   1;
+_________________________________________________________________________________________________________________________________________
+
+/*CREATED BY: RUBY SMITH
+CREATED ON: 8-13-2024
+GOAL: FIND PERCENTAGES OF ORDERS THAT ARE FULFILLED BY EACH WAREHOUSE. ORDER BY PERCENTAGE DESC */
+
+SELECT
+  w.warehouse_id,
+  CONCAT(w.state, ': ',w.warehouse_alias) AS warehouse_name,
+  COUNT(o.order_id) AS num_of_orders,
+  (
+    SELECT
+      COUNT (*)
+      FROM
+        `rs-project-01-429415.warehouse_orders.orders` AS o
+  ) AS total_orders,
+  CASE
+    WHEN 
+    COUNT(o.order_id)/
+    (SELECT
+      COUNT (*)
+    FROM `rs-project-01-429415.warehouse_orders.orders` AS o) <= 0.20
+    THEN 'Fulfilled 0-20%'     --case 1
+    WHEN
+    COUNT(o.order_id)/
+    (SELECT
+      COUNT (*)
+    FROM `rs-project-01-429415.warehouse_orders.orders` AS o) > 0.20
+    AND     
+    COUNT(o.order_id)/
+    (SELECT
+      COUNT (*)
+    FROM `rs-project-01-429415.warehouse_orders.orders` AS o) <= 0.60
+    THEN 'Fulfilled 21-60%'     --case 2
+    ELSE 'Fulfilled +60%'       --case 3
+    END AS fulfillment_summary
+FROM
+  `rs-project-01-429415.warehouse_orders.warehouse` AS w
+LEFT JOIN
+  `rs-project-01-429415.warehouse_orders.orders` AS o
+ON
+  w.warehouse_id = o.warehouse_id
+GROUP BY
+  w.warehouse_id,
+  warehouse_name
+HAVING
+  COUNT(o.order_id) > 0
+ORDER BY 
+  3 DESC;
 _____________________________________
