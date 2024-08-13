@@ -1,0 +1,45 @@
+/* CREATED BY: RUBY SMITH
+CREATED ON: 8-13-2024
+GOAL: TASKED WITH ANALYZING FOOD EVENT REPORTS TO FIND OUT WHICH PRODUCTS NEED TO BE REVIEWED */
+
+SELECT
+  products_industry_name,
+  COUNT(report_number) AS num_of_reports
+FROM
+  bigquery-public-data.fda_food.food_events
+GROUP BY
+  products_industry_name
+ORDER BY
+  2 DESC
+LIMIT 20;   --SAVE AND CREATE TABLE FROM QUERY
+___________________________________________
+
+/*CREATED BY: RUBY SMITH
+CREATED ON: 8-13-2024
+GOAL: FIND OUT WHICH REPORTS CAUSE HOSPITALIZATIONS. OF A LIST OF TOP 20 'products_industry_names' GROUPED BY HIGHEST # OF COMPLAINT REPORTS,
+WE ARE PULLING 'product_industry_name' AND THE # OF HOSPITALIZATIONS REPORTED FROM THE TOP 20 LIST AND SORTING IT DESC FROM HOSPITALIZATIONS REPORTED IN 'outcomes'. */
+
+SELECT
+  products_industry_name,
+  COUNT(report_number) AS count_hospitalizations
+FROM
+  bigquery-public-data.fda_food.food_events
+WHERE
+  products_industry_name IN
+  (
+    SELECT
+      products_industry_name
+    FROM
+      bigquery-public-data.fda_food.food_events
+    GROUP BY
+      products_industry_name
+    ORDER BY
+    COUNT(report_number) DESC
+    LIMIT 20
+  )
+  AND 
+    outcomes LIKE '%Hospitalization%'
+  GROUP BY
+    1
+  ORDER BY
+    2 DESC;
