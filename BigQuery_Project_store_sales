@@ -1,0 +1,26 @@
+/*CREATED BY: RUBY SMITH
+CREATED ON: 8-16-2024
+GOAL: RUN BASIC QUERIES TO CHECK DATA */
+
+SELECT
+  *
+FROM `rs-project-01-429415.sales.sale_info`
+LIMIT 20;
+_________________________________________
+SELECT
+  MIN(Date) AS MinDate, --2017-01-01 (Y-M-D)
+  MAX(Date) AS MaxDate  --2020-12-30 (Y-M-D)
+FROM `rs-project-01-429415.sales.sale_info`;
+_________________________________________
+SELECT
+  EXTRACT(YEAR FROM Date) AS Year,
+  EXTRACT(MONTH FROM Date) AS Month,
+  ProductId,
+  ROUND(MAX(UnitPrice), 2) AS UnitPrice,
+  SUM(Quantity) AS UnitsSold,
+FROM `rs-project-01-429415.sales.sale_info`
+GROUP BY
+  1, 2 ,3
+ORDER BY
+  1, 2, 3;
+_________________________________________
