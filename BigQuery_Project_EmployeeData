@@ -48,4 +48,5 @@ FULL OUTER JOIN        --pulls all data from both tables and leaves blank in col
   rs-project-01-429415.employee_data.departments AS b
   ON
   a.department_id = b.department_id;
+
 ______________________________________________________________________________
