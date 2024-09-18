@@ -2,6 +2,7 @@
 CREATED ON: 07/26/2024
 GOAL: LEARNING ADVANCED QUERIES CAST(), CONCAT(), and COALESCE() */
 
+
 SELECT
   purchase_price
 FROM rs-project-01-429415.Laurens_Furniture_Store.customer_purchases 
