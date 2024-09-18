@@ -10,6 +10,7 @@ WHERE
   indicator_name LIKE '%secondary education%';
  --looking for correct indicator name for next query 'Population of the official age for secondary education, both sexes (number)'
 ________________________________________________________________________
+
 SELECT
   a.region AS region,
   SUM(b.value) AS secondary_edu_pop
