@@ -21,6 +21,7 @@ ORDER BY
   1 DESC,
   2 ASC;
 _____________________________________________________________
+
 --CREATED NEW TABLE FROM ABOVE QUERY IN PROJECT FOLDER ON BIG QUERY TO MAKE FURTHER QUERIES
 _____________________________________________________________
 /*CREATED BY: RUBY SMITH
