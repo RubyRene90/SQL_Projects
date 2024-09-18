@@ -74,6 +74,7 @@ WHERE
 
 --ran previous query to make sure 'tow' was corrected.
 ___________________________________________________________________________________________________________
+
 /*COMPRESSION_RATIO NEEDS TO BE BETWEEN 7 AND 23*/
 
 SELECT
